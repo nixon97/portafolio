@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NIXON VALERO | Portafolio Diseño Gráfico</title>
     <!-- Fonts: Syne (Títulos gordos) & Space Grotesk (Textos finos) -->
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Space+Grotesk:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -34,41 +34,41 @@
             overflow-x: hidden;
         }
 
-        /* TÍTULOS GENERALES */
+        /* TÍTULOS */
         .fat-title {
             font-family: 'Syne', sans-serif;
-            /* Aumentado el espaciado entre letras (antes era negativo) */
-            letter-spacing: 0.02em; 
+            letter-spacing: -0.02em; 
             text-transform: uppercase;
             width: 100%;
             display: block;
         }
 
-        /* 1. TÍTULO DE PORTADA */
+        /* Título Portada */
         .hero-title-size {
             font-size: clamp(3.5rem, 13vw, 15rem);
             line-height: 0.9;
-            letter-spacing: -0.02em; /* Mantenemos un poco más apretado solo en portada */
         }
 
-        /* 2. TÍTULOS DE SECCIÓN (Full Width) */
-        .section-title-size {
-            /* Ajustado levemente el tamaño para compensar el nuevo espaciado */
-            font-size: 12vw; 
-            line-height: 0.8; /* Ajustado para mantenerlo pegado a los bordes */
-            white-space: nowrap; 
-            text-align: center;
-            width: 100%;
+        /* Nuevos Títulos de Sección (Más Estéticos) */
+        .section-header {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
         }
 
-        /* Outline negro para fondo claro (Solo usado en portada GRÁFICO si se desea, o eliminado en secciones) */
+        /* Outline negro elegante */
         .outline-text-black {
             color: transparent;
-            -webkit-text-stroke: 1px rgba(0,0,0,1);
-            transition: all 0.5s ease;
+            -webkit-text-stroke: 1.5px #000;
+            transition: all 0.3s ease;
         }
         .outline-text-black:hover {
-            color: #000000;
+            color: #000;
             -webkit-text-stroke: 0px;
         }
 
@@ -83,7 +83,7 @@
             -webkit-text-stroke: 0px;
         }
 
-        /* Textura de ruido */
+        /* Textura */
         .noise {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -104,26 +104,27 @@
             transform: translateY(0);
         }
 
-        /* Imágenes Full Width */
+        /* Imágenes */
         .art-img {
             width: 100%;
-            height: auto; 
+            height: auto;
             display: block;
-            object-fit: cover;
             transition: transform 0.6s ease;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); /* Sombra suave para separar del blanco */
         }
         
         .image-wrapper {
             overflow: hidden;
             width: 100%;
+            background: #f5f5f5; /* Gris muy suave mientras carga */
         }
 
         .image-wrapper:hover .art-img {
-            transform: scale(1.02);
+            transform: scale(1.03);
         }
     </style>
 </head>
-<body class="selection:bg-white selection:text-black">
+<body class="selection:bg-black selection:text-white">
 
     <div class="noise"></div>
 
@@ -143,7 +144,7 @@
             
             <h1 class="fat-title hero-title-size text-black">
                 DISEÑO<br>
-                <span class="outline-text-black">GRÁFICO</span>
+                <span class="outline-text-black" style="-webkit-text-stroke: 1px black;">GRÁFICO</span>
             </h1>
             
             <div class="mt-12 flex flex-col md:flex-row justify-between items-end gap-8 border-t border-black/10 pt-8">
@@ -179,59 +180,65 @@
         </div>
     </section>
 
-    <!-- 3. ILUSTRACIÓN (Full Bleed - Relleno Negro) -->
-    <section class="bg-white w-full">
+    <!-- 3. ILUSTRACIÓN (Fondo Blanco - Grid 2x2) -->
+    <section class="bg-white text-black py-24 px-6 md:px-12">
         
-        <!-- Título Relleno Negro -->
-        <h2 class="fat-title section-title-size reveal text-black">
-            ILUSTRACIÓN
-        </h2>
+        <div class="reveal mb-12 flex items-baseline gap-4 border-b border-black/10 pb-4">
+            <h2 class="section-header outline-text-black mb-0">
+                ILUSTRACIÓN
+            </h2>
+            <span class="text-xs font-sans font-bold uppercase tracking-widest opacity-50">/ Selected Works</span>
+        </div>
 
-        <!-- Imágenes Ancho Completo -->
-        <div class="flex flex-col gap-0 w-full">
-            <div class="reveal image-wrapper w-full">
+        <!-- Grid 2x2 con Espaciado -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            <div class="reveal image-wrapper">
                 <img src="https://github.com/nixon97/portafolio/blob/main/ed25b15b-9c2e-4a6a-aada-329b67d161cc.jpg?raw=true" class="art-img" alt="Ilustración 1">
             </div>
-            <div class="reveal image-wrapper w-full">
+            <div class="reveal image-wrapper">
                 <img src="https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true" class="art-img" alt="Ilustración 2">
             </div>
-            <div class="reveal image-wrapper w-full">
+            <div class="reveal image-wrapper">
                 <img src="https://github.com/nixon97/portafolio/blob/main/32d84d57-6005-4d27-82fe-dac18af42c62.jpg?raw=true" class="art-img" alt="Ilustración 3">
             </div>
-            <div class="reveal image-wrapper w-full">
+            <div class="reveal image-wrapper">
                 <img src="image_06ac38.png" class="art-img" alt="Ilustración 4" onerror="this.src='https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true'">
             </div>
         </div>
     </section>
 
-    <!-- 4. INFOGRAFÍA (Full Bleed - Relleno Blanco) -->
-    <section class="bg-[#0c0c0c] w-full">
+    <!-- 4. INFOGRAFÍA (Fondo Blanco - Grid 2x2) -->
+    <section class="bg-white text-black py-24 px-6 md:px-12">
         
-        <!-- Título Relleno Blanco -->
-        <h2 class="fat-title section-title-size reveal text-white">
-            INFOGRAFÍA
-        </h2>
+        <div class="reveal mb-12 flex items-baseline gap-4 border-b border-black/10 pb-4">
+            <h2 class="section-header outline-text-black mb-0">
+                INFOGRAFÍA
+            </h2>
+            <span class="text-xs font-sans font-bold uppercase tracking-widest opacity-50">/ Data Viz</span>
+        </div>
 
-        <div class="flex flex-col gap-0 w-full">
-            <div class="reveal image-wrapper w-full">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            <div class="reveal image-wrapper">
                 <img src="https://github.com/nixon97/portafolio/blob/main/1.png?raw=true" class="art-img" alt="Infografía 1">
             </div>
-            <div class="reveal image-wrapper w-full">
+            <div class="reveal image-wrapper">
                 <img src="https://github.com/nixon97/portafolio/blob/main/2.png?raw=true" class="art-img" alt="Infografía 2">
             </div>
-            <div class="reveal image-wrapper w-full">
+            <!-- Esta ocupa 2 columnas si es necesario, o se mantiene en grid -->
+            <div class="reveal image-wrapper md:col-span-2">
                 <img src="https://github.com/nixon97/portafolio/blob/main/3.png?raw=true" class="art-img" alt="Infografía 3">
             </div>
         </div>
     </section>
 
-    <!-- 5. PRODUCTO (Relleno Ácido) -->
-    <section class="px-6 md:px-12 pt-32 pb-32 bg-[#0c0c0c]">
+    <!-- 5. PRODUCTO (Fondo Negro) -->
+    <section class="px-6 md:px-12 pt-32 pb-32 bg-[#0c0c0c] border-t border-white/10">
         
-        <!-- Título Relleno Ácido -->
-        <h2 class="fat-title section-title-size text-acid reveal mb-24 text-left" style="font-size: clamp(2rem, 11vw, 12rem); line-height: 0.9;">
-            PRODUCTO
-        </h2>
+        <div class="reveal mb-24">
+            <h2 class="fat-title text-acid text-left" style="font-size: clamp(3rem, 10vw, 8rem);">
+                PRODUCTO
+            </h2>
+        </div>
 
         <div class="space-y-32">
             <!-- Libro -->
