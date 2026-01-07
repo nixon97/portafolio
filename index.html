@@ -37,25 +37,31 @@
         /* TÍTULOS GENERALES */
         .fat-title {
             font-family: 'Syne', sans-serif;
-            line-height: 0.9;
-            letter-spacing: -0.04em;
+            /* Aumentado el espaciado entre letras (antes era negativo) */
+            letter-spacing: 0.02em; 
             text-transform: uppercase;
+            width: 100%;
+            display: block;
+        }
+
+        /* 1. TÍTULO DE PORTADA */
+        .hero-title-size {
+            font-size: clamp(3.5rem, 13vw, 15rem);
+            line-height: 0.9;
+            letter-spacing: -0.02em; /* Mantenemos un poco más apretado solo en portada */
+        }
+
+        /* 2. TÍTULOS DE SECCIÓN (Full Width) */
+        .section-title-size {
+            /* Ajustado levemente el tamaño para compensar el nuevo espaciado */
+            font-size: 12vw; 
+            line-height: 0.8; /* Ajustado para mantenerlo pegado a los bordes */
+            white-space: nowrap; 
+            text-align: center;
             width: 100%;
         }
 
-        /* 1. TÍTULO DE PORTADA (Puede ser gigante porque son palabras cortas: DISEÑO / GRÁFICO) */
-        .hero-title-size {
-            font-size: clamp(3.5rem, 13vw, 15rem);
-        }
-
-        /* 2. TÍTULOS DE SECCIÓN (Ajustados para palabras largas como ILUSTRACIÓN) */
-        /* white-space: nowrap obliga a que se quede en una sola línea */
-        .section-title-size {
-            font-size: clamp(2rem, 8.5vw, 12rem); /* Reducido el factor VW para que quepan */
-            white-space: nowrap; 
-        }
-
-        /* Outline negro para fondo claro */
+        /* Outline negro para fondo claro (Solo usado en portada GRÁFICO si se desea, o eliminado en secciones) */
         .outline-text-black {
             color: transparent;
             -webkit-text-stroke: 1px rgba(0,0,0,1);
@@ -69,7 +75,7 @@
         /* Outline blanco para fondo oscuro */
         .outline-text {
             color: transparent;
-            -webkit-text-stroke: 1px rgba(255,255,255,0.4);
+            -webkit-text-stroke: 1px rgba(255,255,255,0.8);
             transition: all 0.5s ease;
         }
         .outline-text:hover {
@@ -98,16 +104,18 @@
             transform: translateY(0);
         }
 
-        /* Imágenes */
+        /* Imágenes Full Width */
         .art-img {
             width: 100%;
             height: auto; 
             display: block;
+            object-fit: cover;
             transition: transform 0.6s ease;
         }
         
         .image-wrapper {
             overflow: hidden;
+            width: 100%;
         }
 
         .image-wrapper:hover .art-img {
@@ -171,57 +179,58 @@
         </div>
     </section>
 
-    <!-- 3. ILUSTRACIÓN -->
-    <section class="px-6 md:px-12 pt-24 pb-24 bg-[#0c0c0c] border-t border-white/5">
+    <!-- 3. ILUSTRACIÓN (Full Bleed - Relleno Negro) -->
+    <section class="bg-white w-full">
         
-        <!-- Aplicando .section-title-size para evitar cortes -->
-        <h2 class="fat-title section-title-size text-acid reveal mb-16">
-            <span class="outline-text text-white">ILUSTRACIÓN</span>
+        <!-- Título Relleno Negro -->
+        <h2 class="fat-title section-title-size reveal text-black">
+            ILUSTRACIÓN
         </h2>
 
-        <div class="flex flex-col gap-0 max-w-4xl mx-auto">
+        <!-- Imágenes Ancho Completo -->
+        <div class="flex flex-col gap-0 w-full">
             <div class="reveal image-wrapper w-full">
-                <img src="https://github.com/nixon97/portafolio/blob/main/ed25b15b-9c2e-4a6a-aada-329b67d161cc.jpg?raw=true" class="art-img w-full" alt="Ilustración 1">
+                <img src="https://github.com/nixon97/portafolio/blob/main/ed25b15b-9c2e-4a6a-aada-329b67d161cc.jpg?raw=true" class="art-img" alt="Ilustración 1">
             </div>
             <div class="reveal image-wrapper w-full">
-                <img src="https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true" class="art-img w-full" alt="Ilustración 2">
+                <img src="https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true" class="art-img" alt="Ilustración 2">
             </div>
             <div class="reveal image-wrapper w-full">
-                <img src="https://github.com/nixon97/portafolio/blob/main/32d84d57-6005-4d27-82fe-dac18af42c62.jpg?raw=true" class="art-img w-full" alt="Ilustración 3">
+                <img src="https://github.com/nixon97/portafolio/blob/main/32d84d57-6005-4d27-82fe-dac18af42c62.jpg?raw=true" class="art-img" alt="Ilustración 3">
             </div>
             <div class="reveal image-wrapper w-full">
-                <img src="image_06ac38.png" class="art-img w-full" alt="Ilustración 4" onerror="this.src='https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true'">
+                <img src="image_06ac38.png" class="art-img" alt="Ilustración 4" onerror="this.src='https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true'">
             </div>
         </div>
     </section>
 
-    <!-- 4. INFOGRAFÍA -->
-    <section class="px-6 md:px-12 pb-24 bg-[#0c0c0c]">
+    <!-- 4. INFOGRAFÍA (Full Bleed - Relleno Blanco) -->
+    <section class="bg-[#0c0c0c] w-full">
         
-        <!-- Aplicando .section-title-size -->
-        <h2 class="fat-title section-title-size text-acid reveal mb-16">
-            <span class="outline-text text-white">INFOGRAFÍA</span>
+        <!-- Título Relleno Blanco -->
+        <h2 class="fat-title section-title-size reveal text-white">
+            INFOGRAFÍA
         </h2>
 
-        <div class="flex flex-col gap-0 max-w-4xl mx-auto">
+        <div class="flex flex-col gap-0 w-full">
             <div class="reveal image-wrapper w-full">
-                <img src="https://github.com/nixon97/portafolio/blob/main/1.png?raw=true" class="art-img w-full" alt="Infografía 1">
+                <img src="https://github.com/nixon97/portafolio/blob/main/1.png?raw=true" class="art-img" alt="Infografía 1">
             </div>
             <div class="reveal image-wrapper w-full">
-                <img src="https://github.com/nixon97/portafolio/blob/main/2.png?raw=true" class="art-img w-full" alt="Infografía 2">
+                <img src="https://github.com/nixon97/portafolio/blob/main/2.png?raw=true" class="art-img" alt="Infografía 2">
             </div>
             <div class="reveal image-wrapper w-full">
-                <img src="https://github.com/nixon97/portafolio/blob/main/3.png?raw=true" class="art-img w-full" alt="Infografía 3">
+                <img src="https://github.com/nixon97/portafolio/blob/main/3.png?raw=true" class="art-img" alt="Infografía 3">
             </div>
         </div>
     </section>
 
-    <!-- 5. PRODUCTO -->
-    <section class="px-6 md:px-12 pb-32 bg-[#0c0c0c]">
+    <!-- 5. PRODUCTO (Relleno Ácido) -->
+    <section class="px-6 md:px-12 pt-32 pb-32 bg-[#0c0c0c]">
         
-        <!-- Aplicando .section-title-size -->
-        <h2 class="fat-title section-title-size text-acid reveal mb-24">
-            <span class="outline-text text-white">PRODUCTO</span>
+        <!-- Título Relleno Ácido -->
+        <h2 class="fat-title section-title-size text-acid reveal mb-24 text-left" style="font-size: clamp(2rem, 11vw, 12rem); line-height: 0.9;">
+            PRODUCTO
         </h2>
 
         <div class="space-y-32">
@@ -253,14 +262,13 @@
         </div>
     </section>
 
-    <!-- 6. FOOTER -->
+    <!-- 6. FOOTER (Relleno Negro) -->
     <footer class="py-24 px-6 md:px-12 bg-white text-black border-t-8 border-acid">
         <div class="reveal">
             <p class="text-[10px] uppercase tracking-widest font-bold opacity-40 mb-8">Work with me</p>
             
             <a href="mailto:nixonvaldo.valero@gmail.com" class="block group">
-                <!-- Aplicando .section-title-size para CONTÁCTAME -->
-                <h2 class="fat-title section-title-size text-black group-hover:text-acid transition-colors duration-300">
+                <h2 class="fat-title text-black group-hover:text-acid transition-colors duration-300" style="font-size: clamp(2rem, 10vw, 12rem); line-height: 0.9;">
                     CONTÁCTAME
                 </h2>
             </a>
