@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nixon Valero | Graphic Designer Portfolio</title>
+    <!-- Syne para títulos (Extra Bold) y Inter para cuerpo -->
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'acid': '#ccff00', 
+                        'dark': '#0a0a0a',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        title: ['Syne', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            scroll-behavior: smooth;
+        }
+
+        /* Títulos Brutalistas de Alto Impacto */
+        .fat-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3.5rem, 12vw, 15vw);
+            line-height: 0.8;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+        }
+
+        .section-header {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 8vw, 10vw);
+            line-height: 0.9;
+            text-transform: uppercase;
+        }
+
+        /* Texto técnico minimalista */
+        .text-meta {
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            font-weight: 400;
+            color: #888;
+        }
+
+        .text-para {
+            font-size: 15px;
+            line-height: 1.6;
+            font-weight: 300;
+            max-width: 40ch;
+        }
+
+        /* Efecto de revelación suave */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Grano Premium */
+        .grain {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Contenedores de Imagen (Sin recortes) */
+        .art-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 0;
+        }
+
+        .art-container img {
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+        }
+
+        .sticky-label {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+    </style>
+</head>
+<body class="font-sans overflow-x-hidden selection:bg-acid selection:text-black">
+
+    <div class="grain"></div>
+
+    <!-- NAVEGACIÓN -->
+    <nav class="fixed top-0 w-full z-[100] p-8 md:p-12 flex justify-between items-center mix-blend-difference text-white">
+        <div class="font-title text-2xl tracking-tighter">NV</div>
+        <div class="flex gap-8 text-meta !text-white !opacity-100">
+            <a href="#ilustracion" class="hover:text-acid transition">Ilustración</a>
+            <a href="#infografia" class="hover:text-acid transition">Infografía</a>
+            <a href="#producto" class="hover:text-acid transition">Producto</a>
+        </div>
+    </nav>
+
+    <!-- 1. PORTADA: MINIMALISMO TOTAL -->
+    <header class="min-h-screen flex flex-col justify-end p-8 md:p-16 pb-24 border-b border-gray-100">
+        <div class="reveal active">
+            <h1 class="fat-title mb-16">
+                DISEÑADOR<br><span class="text-acid" style="-webkit-text-stroke: 2px black;">GRÁFICO</span>
+            </h1>
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+                <div class="space-y-4">
+                    <p class="text-meta">Nixon Valero — Creative Edition</p>
+                    <p class="text-para">
+                        Enfoque en sistemas visuales, diagramación editorial y narrativa gráfica contemporánea. Basado en Colombia.
+                    </p>
+                </div>
+                <div class="text-meta opacity-40">2026 Portfolio</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. PERFIL: NIXON VALERO -->
+    <section class="min-h-screen bg-dark text-white p-8 md:p-16 flex flex-col justify-center">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+            <div class="md:col-span-12 reveal">
+                <h2 class="section-header">NIXON VALERO</h2>
+                <div class="h-[1px] w-full bg-white/20 my-10"></div>
+            </div>
+            <div class="md:col-span-5 reveal">
+                <img src="https://github.com/nixon97/portafolio/blob/main/Gemini_Generated_Image_t190lnt190lnt190.png?raw=true" alt="Nixon Valero" class="w-full grayscale filter contrast-125">
+            </div>
+            <div class="md:col-span-6 md:col-start-7 reveal space-y-10">
+                <p class="text-3xl md:text-5xl font-title uppercase leading-none">
+                    Transformando <span class="text-acid">información</span> en impacto visual.
+                </p>
+                <p class="text-para !max-w-md opacity-60">
+                    Como diseñador gráfico, mi objetivo es depurar el ruido visual. Me especializo en proyectos donde la técnica editorial y la ilustración conceptual se unen para crear identidades coherentes y memorables.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. ILUSTRACIÓN: RITMO Y COLOR -->
+    <section id="ilustracion" class="py-32 bg-white">
+        <div class="px-8 md:px-16 mb-24 reveal">
+            <p class="text-meta mb-4">Sección 01</p>
+            <h2 class="section-header">ILUSTRACIÓN</h2>
+        </div>
+
+        <div class="space-y-32 reveal px-8 md:px-32">
+            <!-- Ilustración Grande Central -->
+            <div class="art-container">
+                <img src="https://github.com/nixon97/portafolio/blob/main/ed25b15b-9c2e-4a6a-aada-329b67d161cc.jpg?raw=true" class="w-full md:w-3/4" alt="Ilustración Principal">
+            </div>
+            
+            <!-- Dual Grid (Sin recortes) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+                <div class="art-container">
+                    <img src="https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true" alt="Ilustración Amarilla">
+                </div>
+                <div class="art-container">
+                    <img src="https://github.com/nixon97/portafolio/blob/main/32d84d57-6005-4d27-82fe-dac18af42c62.jpg?raw=true" alt="Ilustración Azul">
+                </div>
+            </div>
+
+            <!-- Full Width Local -->
+            <div class="art-container">
+                <img src="image_06ac38.png" class="w-full md:w-2/3" alt="Ilustración Floral">
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. INFOGRAFÍA: MAQUETACIÓN TÉCNICA -->
+    <section id="infografia" class="py-32 bg-acid text-black">
+        <div class="px-8 md:px-16 mb-32 reveal">
+            <h2 class="section-header">INFOGRAFÍA</h2>
+            <p class="text-meta !text-black mt-4">Claridad Visual / Data Design</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 px-8 md:px-16 reveal">
+            <div class="art-container">
+                <img src="https://github.com/nixon97/portafolio/blob/main/1.png?raw=true" alt="Infografía 1">
+            </div>
+            <div class="art-container">
+                <img src="https://github.com/nixon97/portafolio/blob/main/2.png?raw=true" alt="Infografía 2">
+            </div>
+            <div class="art-container">
+                <img src="https://github.com/nixon97/portafolio/blob/main/3.png?raw=true" alt="Infografía 3">
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. PRODUCTO: BLACK IMMERSION (Sin huecos, bloque sólido) -->
+    <section id="producto" class="bg-dark text-white py-32">
+        <div class="px-8 md:px-16 mb-32 reveal">
+            <h2 class="section-header">PRODUCTO</h2>
+        </div>
+
+        <div class="space-y-64">
+            <!-- Producto 1: Libro -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center reveal px-8 md:px-16">
+                <div class="md:col-span-8">
+                    <img src="https://github.com/nixon97/portafolio/blob/main/maqueta%20presentacion%20librox.png?raw=true" class="w-full h-auto" alt="Libro Álbum">
+                </div>
+                <div class="md:col-span-4 sticky-label">
+                    <p class="text-meta text-acid mb-6">Editorial & Branding</p>
+                    <h3 class="font-title text-4xl mb-8 leading-none">LIBRO ÁLBUM<br>ILUSTRADO</h3>
+                    <p class="text-para opacity-40">
+                        Proyecto integral desarrollado para empresa en Cúcuta. Una exploración donde la diagramación técnica se funde con la ilustración narrativa.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Producto 2: Juego -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center reveal px-8 md:px-16">
+                <div class="md:col-span-4 order-2 md:order-1 sticky-label md:text-right">
+                    <p class="text-meta text-acid mb-6">Game Design</p>
+                    <h3 class="font-title text-4xl mb-8 leading-none">JUEGO DE<br>MESA</h3>
+                    <p class="text-para md:ml-auto opacity-40">
+                        Identidad visual y empaque lúdico. Enfoque en la claridad lúdica y estética contemporánea aplicada a componentes físicos.
+                    </p>
+                </div>
+                <div class="md:col-span-8 order-1 md:order-2">
+                    <img src="https://github.com/nixon97/portafolio/blob/main/bed67c2e-8006-48f9-9171-7fbda5d729a9.jpg?raw=true" class="w-full h-auto" alt="Juego de Mesa">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. CONTACTO -->
+    <footer id="contacto" class="p-8 md:p-16 bg-white border-t-8 border-acid">
+        <div class="reveal">
+            <h2 class="fat-title mb-24">CONTÁCTAME</h2>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
+                <div class="md:col-span-7">
+                    <p class="text-meta opacity-40 mb-4">Direct Email</p>
+                    <a href="mailto:nixonvaldo.valero@gmail.com" class="text-2xl md:text-4xl font-title hover:text-acid transition-all break-words">nixonvaldo.valero@gmail.com</a>
+                </div>
+                <div class="md:col-span-5 grid grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-meta opacity-40 mb-4">Instagram</p>
+                        <a href="#" class="font-title uppercase text-sm hover:underline">@novapizolero</a>
+                    </div>
+                    <div>
+                        <p class="text-meta opacity-40 mb-4">Behance</p>
+                        <a href="#" class="font-title uppercase text-sm hover:underline">nixonvalero</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-48 text-meta opacity-20 text-center">
+            Nixon Valero — © 2026 — All Rights Reserved
+        </div>
+    </footer>
+
+    <script>
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
