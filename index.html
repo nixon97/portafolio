@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nixon Valero | Graphic Designer Portfolio</title>
-    <!-- Syne para títulos (Extra Bold) y Inter para cuerpo -->
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>NIXON VALERO | Lead Visual Designer</title>
+    <!-- Fonts: Syne (Brutalism) & Space Grotesk (Modern Tech) -->
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -13,60 +13,74 @@
                 extend: {
                     colors: {
                         'acid': '#ccff00', 
-                        'dark': '#0a0a0a',
+                        'dark': '#080808',
+                        'gray-custom': '#1a1a1a',
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Space Grotesk', 'sans-serif'],
                         title: ['Syne', 'sans-serif'],
                     },
+                    animation: {
+                        'marquee': 'marquee 25s linear infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    }
                 }
             }
         }
     </script>
     <style>
         body {
-            background-color: #ffffff;
-            color: #000000;
-            scroll-behavior: smooth;
+            background-color: #080808;
+            color: #ffffff;
+            cursor: none; /* Custom cursor */
         }
 
-        /* Títulos Brutalistas de Alto Impacto */
+        /* Custom Cursor */
+        #cursor {
+            width: 20px;
+            height: 20px;
+            background: #ccff00;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-difference: difference;
+            transition: transform 0.1s ease;
+        }
+
         .fat-title {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(3.5rem, 12vw, 15vw);
-            line-height: 0.8;
-            letter-spacing: -0.05em;
+            font-size: clamp(4rem, 15vw, 18vw);
+            line-height: 0.75;
+            letter-spacing: -0.06em;
             text-transform: uppercase;
         }
 
-        .section-header {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(2rem, 8vw, 10vw);
-            line-height: 0.9;
-            text-transform: uppercase;
+        .outline-text {
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.3);
         }
 
-        /* Texto técnico minimalista */
-        .text-meta {
-            font-size: 10px;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            font-weight: 400;
-            color: #888;
+        /* Noise Texture Over */
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 9000;
         }
 
-        .text-para {
-            font-size: 15px;
-            line-height: 1.6;
-            font-weight: 300;
-            max-width: 40ch;
-        }
-
-        /* Efecto de revelación suave */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
         .reveal.active {
@@ -74,206 +88,256 @@
             transform: translateY(0);
         }
 
-        /* Grano Premium */
-        .grain {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-            opacity: 0.04;
-            pointer-events: none;
-            z-index: 9999;
+        .project-card:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
         }
 
-        /* Contenedores de Imagen (Sin recortes) */
-        .art-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem 0;
+        .project-card img {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: grayscale(100%);
         }
 
-        .art-container img {
-            max-width: 100%;
-            height: auto;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
         }
 
-        .sticky-label {
-            position: sticky;
-            top: 100px;
-            height: fit-content;
-        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #080808; }
+        ::-webkit-scrollbar-thumb { background: #ccff00; }
     </style>
 </head>
-<body class="font-sans overflow-x-hidden selection:bg-acid selection:text-black">
+<body class="selection:bg-acid selection:text-black overflow-x-hidden">
 
-    <div class="grain"></div>
+    <div id="cursor"></div>
+    <div class="noise"></div>
 
-    <!-- NAVEGACIÓN -->
-    <nav class="fixed top-0 w-full z-[100] p-8 md:p-12 flex justify-between items-center mix-blend-difference text-white">
-        <div class="font-title text-2xl tracking-tighter">NV</div>
-        <div class="flex gap-8 text-meta !text-white !opacity-100">
-            <a href="#ilustracion" class="hover:text-acid transition">Ilustración</a>
-            <a href="#infografia" class="hover:text-acid transition">Infografía</a>
-            <a href="#producto" class="hover:text-acid transition">Producto</a>
-        </div>
+    <!-- NAVEGACIÓN DOCK -->
+    <nav class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] bg-white/5 backdrop-blur-lg border border-white/10 px-6 py-3 rounded-full flex gap-8 items-center">
+        <a href="#work" class="text-[10px] tracking-widest uppercase font-bold hover:text-acid transition">Proyectos</a>
+        <a href="#profile" class="text-[10px] tracking-widest uppercase font-bold hover:text-acid transition">Perfil</a>
+        <div class="w-8 h-8 bg-acid rounded-full flex items-center justify-center text-black font-title text-xs">NV</div>
+        <a href="#contact" class="text-[10px] tracking-widest uppercase font-bold hover:text-acid transition">Contacto</a>
     </nav>
 
-    <!-- 1. PORTADA: MINIMALISMO TOTAL -->
-    <header class="min-h-screen flex flex-col justify-end p-8 md:p-16 pb-24 border-b border-gray-100">
-        <div class="reveal active">
-            <h1 class="fat-title mb-16">
-                DISEÑADOR<br><span class="text-acid" style="-webkit-text-stroke: 2px black;">GRÁFICO</span>
+    <!-- HEADER / HERO -->
+    <header class="relative min-h-screen flex flex-col justify-center px-6 md:px-12 overflow-hidden">
+        <div class="absolute top-12 right-12 animate-spin-slow opacity-20 hidden md:block">
+            <svg width="150" height="150" viewBox="0 0 100 100">
+                <path id="circlePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
+                <text font-family="Space Grotesk" font-size="8" fill="white">
+                    <textPath xlink:href="#circlePath">ESTÉTICA • CONTEMPORÁNEA • MINIMALISMO • 2026 •</textPath>
+                </text>
+            </svg>
+        </div>
+
+        <div class="z-10">
+            <p class="text-acid font-bold tracking-[0.3em] mb-4 text-xs reveal active">CREATIVE DIRECTOR / DESIGNER</p>
+            <h1 class="fat-title reveal active" style="transition-delay: 200ms;">
+                NIXON<br>
+                <span class="outline-text">VALERO</span>
             </h1>
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
-                <div class="space-y-4">
-                    <p class="text-meta">Nixon Valero — Creative Edition</p>
-                    <p class="text-para">
-                        Enfoque en sistemas visuales, diagramación editorial y narrativa gráfica contemporánea. Basado en Colombia.
-                    </p>
+            
+            <div class="mt-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-8 reveal active" style="transition-delay: 400ms;">
+                <p class="max-w-sm text-sm md:text-base leading-relaxed opacity-60 font-light">
+                    Especializado en la creación de ecosistemas visuales de alto impacto. Mi enfoque fusiona el brutalismo urbano con la precisión editorial suiza.
+                </p>
+                <div class="flex flex-col items-end">
+                    <span class="text-[10px] opacity-40 uppercase tracking-tighter">Based in Colombia</span>
+                    <span class="text-[10px] opacity-40 uppercase tracking-tighter">Global Operations ©26</span>
                 </div>
-                <div class="text-meta opacity-40">2026 Portfolio</div>
             </div>
         </div>
     </header>
 
-    <!-- 2. PERFIL: NIXON VALERO -->
-    <section class="min-h-screen bg-dark text-white p-8 md:p-16 flex flex-col justify-center">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-            <div class="md:col-span-12 reveal">
-                <h2 class="section-header">NIXON VALERO</h2>
-                <div class="h-[1px] w-full bg-white/20 my-10"></div>
+    <!-- TICKER / MARQUEE -->
+    <div class="py-6 border-y border-white/10 overflow-hidden bg-acid text-black flex whitespace-nowrap">
+        <div class="flex animate-marquee font-title text-4xl md:text-6xl uppercase italic">
+            <span class="mx-8">• VISUAL IMPACT</span>
+            <span class="mx-8">• BRANDING</span>
+            <span class="mx-8">• EDITORIAL DESIGN</span>
+            <span class="mx-8">• INFOGRAPHY</span>
+            <span class="mx-8">• PRODUCT DESIGN</span>
+        </div>
+        <div class="flex animate-marquee font-title text-4xl md:text-6xl uppercase italic">
+            <span class="mx-8">• VISUAL IMPACT</span>
+            <span class="mx-8">• BRANDING</span>
+            <span class="mx-8">• EDITORIAL DESIGN</span>
+            <span class="mx-8">• INFOGRAPHY</span>
+            <span class="mx-8">• PRODUCT DESIGN</span>
+        </div>
+    </div>
+
+    <!-- SECCIÓN PERFIL -->
+    <section id="profile" class="py-32 px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-12 items-center border-b border-white/5">
+        <div class="md:col-span-5 reveal">
+            <div class="relative group overflow-hidden rounded-2xl border border-white/10">
+                <img src="https://github.com/nixon97/portafolio/blob/main/Gemini_Generated_Image_t190lnt190lnt190.png?raw=true" 
+                     alt="Nixon Valero" 
+                     class="w-full grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000">
+                <div class="absolute bottom-4 left-4 bg-black/80 backdrop-blur-md p-3 rounded-lg border border-white/10">
+                    <p class="text-[10px] font-bold tracking-widest text-acid uppercase">ID_CARD: 0098-NV</p>
+                </div>
             </div>
-            <div class="md:col-span-5 reveal">
-                <img src="https://github.com/nixon97/portafolio/blob/main/Gemini_Generated_Image_t190lnt190lnt190.png?raw=true" alt="Nixon Valero" class="w-full grayscale filter contrast-125">
-            </div>
-            <div class="md:col-span-6 md:col-start-7 reveal space-y-10">
-                <p class="text-3xl md:text-5xl font-title uppercase leading-none">
-                    Transformando <span class="text-acid">información</span> en impacto visual.
-                </p>
-                <p class="text-para !max-w-md opacity-60">
-                    Como diseñador gráfico, mi objetivo es depurar el ruido visual. Me especializo en proyectos donde la técnica editorial y la ilustración conceptual se unen para crear identidades coherentes y memorables.
-                </p>
+        </div>
+        <div class="md:col-span-7 space-y-8 reveal">
+            <h2 class="text-4xl md:text-7xl font-title uppercase leading-none">Depurando el <br><span class="text-acid">ruido visual</span>.</h2>
+            <p class="text-lg md:text-2xl opacity-80 font-light leading-relaxed max-w-2xl">
+                Creo identidades que no solo se ven bien, sino que comunican con autoridad. Mi proceso es una disección técnica de cada marca para encontrar su núcleo más puro.
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-8 pt-8 border-t border-white/10">
+                <div>
+                    <h4 class="text-acid text-xs font-bold uppercase mb-2">Expertise</h4>
+                    <p class="text-xs opacity-50 uppercase leading-loose">Visual Identity<br>Data Viz<br>Illustration</p>
+                </div>
+                <div>
+                    <h4 class="text-acid text-xs font-bold uppercase mb-2">Method</h4>
+                    <p class="text-xs opacity-50 uppercase leading-loose">Minimalism<br>Brutalism<br>Technical Layout</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 3. ILUSTRACIÓN: RITMO Y COLOR -->
-    <section id="ilustracion" class="py-32 bg-white">
-        <div class="px-8 md:px-16 mb-24 reveal">
-            <p class="text-meta mb-4">Sección 01</p>
-            <h2 class="section-header">ILUSTRACIÓN</h2>
+    <!-- PORTAFOLIO: GRID MODERNO -->
+    <section id="work" class="py-32 px-6 md:px-12 bg-[#0c0c0c]">
+        <div class="flex justify-between items-end mb-24 reveal">
+            <h2 class="fat-title text-acid">SELECTED<br><span class="outline-text">WORKS</span></h2>
+            <div class="vertical-text text-[10px] opacity-30 tracking-[0.5em] uppercase hidden md:block">Scroll to explore / 2026 Edition</div>
         </div>
 
-        <div class="space-y-32 reveal px-8 md:px-32">
-            <!-- Ilustración Grande Central -->
-            <div class="art-container">
-                <img src="https://github.com/nixon97/portafolio/blob/main/ed25b15b-9c2e-4a6a-aada-329b67d161cc.jpg?raw=true" class="w-full md:w-3/4" alt="Ilustración Principal">
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-32">
             
-            <!-- Dual Grid (Sin recortes) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
-                <div class="art-container">
-                    <img src="https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true" alt="Ilustración Amarilla">
+            <!-- Proyecto 1 -->
+            <div class="project-card reveal group">
+                <div class="overflow-hidden rounded-xl bg-gray-custom mb-6 border border-white/5">
+                    <img src="https://github.com/nixon97/portafolio/blob/main/ed25b15b-9c2e-4a6a-aada-329b67d161cc.jpg?raw=true" 
+                         class="w-full h-auto aspect-[4/5] object-cover" alt="Ilustración">
                 </div>
-                <div class="art-container">
-                    <img src="https://github.com/nixon97/portafolio/blob/main/32d84d57-6005-4d27-82fe-dac18af42c62.jpg?raw=true" alt="Ilustración Azul">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-acid text-[10px] font-bold tracking-widest uppercase mb-1">Vol. 01 — Illustration</p>
+                        <h3 class="font-title text-2xl uppercase">Narrativa Visual</h3>
+                    </div>
+                    <span class="text-[10px] opacity-40 font-mono">[2026]</span>
                 </div>
             </div>
 
-            <!-- Full Width Local -->
-            <div class="art-container">
-                <img src="image_06ac38.png" class="w-full md:w-2/3" alt="Ilustración Floral">
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. INFOGRAFÍA: MAQUETACIÓN TÉCNICA -->
-    <section id="infografia" class="py-32 bg-acid text-black">
-        <div class="px-8 md:px-16 mb-32 reveal">
-            <h2 class="section-header">INFOGRAFÍA</h2>
-            <p class="text-meta !text-black mt-4">Claridad Visual / Data Design</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 px-8 md:px-16 reveal">
-            <div class="art-container">
-                <img src="https://github.com/nixon97/portafolio/blob/main/1.png?raw=true" alt="Infografía 1">
-            </div>
-            <div class="art-container">
-                <img src="https://github.com/nixon97/portafolio/blob/main/2.png?raw=true" alt="Infografía 2">
-            </div>
-            <div class="art-container">
-                <img src="https://github.com/nixon97/portafolio/blob/main/3.png?raw=true" alt="Infografía 3">
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. PRODUCTO: BLACK IMMERSION (Sin huecos, bloque sólido) -->
-    <section id="producto" class="bg-dark text-white py-32">
-        <div class="px-8 md:px-16 mb-32 reveal">
-            <h2 class="section-header">PRODUCTO</h2>
-        </div>
-
-        <div class="space-y-64">
-            <!-- Producto 1: Libro -->
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center reveal px-8 md:px-16">
-                <div class="md:col-span-8">
-                    <img src="https://github.com/nixon97/portafolio/blob/main/maqueta%20presentacion%20librox.png?raw=true" class="w-full h-auto" alt="Libro Álbum">
+            <!-- Proyecto 2 -->
+            <div class="project-card reveal group md:mt-32">
+                <div class="overflow-hidden rounded-xl bg-gray-custom mb-6 border border-white/5">
+                    <img src="https://github.com/nixon97/portafolio/blob/main/maqueta%20presentacion%20librox.png?raw=true" 
+                         class="w-full h-auto aspect-[4/5] object-cover" alt="Editorial">
                 </div>
-                <div class="md:col-span-4 sticky-label">
-                    <p class="text-meta text-acid mb-6">Editorial & Branding</p>
-                    <h3 class="font-title text-4xl mb-8 leading-none">LIBRO ÁLBUM<br>ILUSTRADO</h3>
-                    <p class="text-para opacity-40">
-                        Proyecto integral desarrollado para empresa en Cúcuta. Una exploración donde la diagramación técnica se funde con la ilustración narrativa.
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-acid text-[10px] font-bold tracking-widest uppercase mb-1">Vol. 02 — Editorial</p>
+                        <h3 class="font-title text-2xl uppercase">Libro Álbum</h3>
+                    </div>
+                    <span class="text-[10px] opacity-40 font-mono">[2025]</span>
+                </div>
+            </div>
+
+            <!-- Proyecto 3 (Ancho Completo) -->
+            <div class="project-card reveal group md:col-span-2">
+                <div class="overflow-hidden rounded-xl bg-gray-custom mb-6 border border-white/5 relative">
+                    <img src="https://github.com/nixon97/portafolio/blob/main/1.png?raw=true" 
+                         class="w-full h-auto aspect-[21/9] object-cover" alt="Infografía">
+                    <div class="absolute inset-0 bg-acid/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="bg-acid text-black px-6 py-2 font-bold text-xs uppercase tracking-tighter">Ver Detalles</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-acid text-[10px] font-bold tracking-widest uppercase mb-1">Vol. 03 — Data Visualization</p>
+                        <h3 class="font-title text-2xl uppercase">Infografía Técnica Sistematizada</h3>
+                    </div>
+                    <p class="max-w-xs text-xs opacity-50 uppercase leading-relaxed text-right">
+                        Claridad visual aplicada a datos complejos. Una exploración de legibilidad y estética industrial.
                     </p>
                 </div>
             </div>
 
-            <!-- Producto 2: Juego -->
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center reveal px-8 md:px-16">
-                <div class="md:col-span-4 order-2 md:order-1 sticky-label md:text-right">
-                    <p class="text-meta text-acid mb-6">Game Design</p>
-                    <h3 class="font-title text-4xl mb-8 leading-none">JUEGO DE<br>MESA</h3>
-                    <p class="text-para md:ml-auto opacity-40">
-                        Identidad visual y empaque lúdico. Enfoque en la claridad lúdica y estética contemporánea aplicada a componentes físicos.
-                    </p>
+            <!-- Proyecto 4 -->
+            <div class="project-card reveal group">
+                <div class="overflow-hidden rounded-xl bg-gray-custom mb-6 border border-white/5">
+                    <img src="https://github.com/nixon97/portafolio/blob/main/bed67c2e-8006-48f9-9171-7fbda5d729a9.jpg?raw=true" 
+                         class="w-full h-auto aspect-[4/5] object-cover" alt="Game Design">
                 </div>
-                <div class="md:col-span-8 order-1 md:order-2">
-                    <img src="https://github.com/nixon97/portafolio/blob/main/bed67c2e-8006-48f9-9171-7fbda5d729a9.jpg?raw=true" class="w-full h-auto" alt="Juego de Mesa">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-acid text-[10px] font-bold tracking-widest uppercase mb-1">Vol. 04 — Packaging</p>
+                        <h3 class="font-title text-2xl uppercase">Juego de Mesa</h3>
+                    </div>
+                    <span class="text-[10px] opacity-40 font-mono">[2026]</span>
                 </div>
             </div>
+
+            <!-- Proyecto 5 -->
+            <div class="project-card reveal group md:mt-32">
+                <div class="overflow-hidden rounded-xl bg-gray-custom mb-6 border border-white/5">
+                    <img src="https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true" 
+                         class="w-full h-auto aspect-[4/5] object-cover" alt="Art">
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-acid text-[10px] font-bold tracking-widest uppercase mb-1">Vol. 05 — Concept Art</p>
+                        <h3 class="font-title text-2xl uppercase">Ritmo & Cromatismo</h3>
+                    </div>
+                    <span class="text-[10px] opacity-40 font-mono">[2025]</span>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- 6. CONTACTO -->
-    <footer id="contacto" class="p-8 md:p-16 bg-white border-t-8 border-acid">
-        <div class="reveal">
-            <h2 class="fat-title mb-24">CONTÁCTAME</h2>
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
-                <div class="md:col-span-7">
-                    <p class="text-meta opacity-40 mb-4">Direct Email</p>
-                    <a href="mailto:nixonvaldo.valero@gmail.com" class="text-2xl md:text-4xl font-title hover:text-acid transition-all break-words">nixonvaldo.valero@gmail.com</a>
+    <!-- FOOTER / CONTACTO -->
+    <footer id="contact" class="relative py-32 px-6 md:px-12 bg-white text-black overflow-hidden">
+        <div class="relative z-10">
+            <p class="text-[10px] font-bold tracking-[0.4em] uppercase mb-12 border-b border-black/10 pb-4 inline-block">Hablemos de tu próximo proyecto</p>
+            
+            <div class="flex flex-col md:flex-row justify-between items-start gap-12">
+                <div class="reveal">
+                    <a href="mailto:nixonvaldo.valero@gmail.com" class="fat-title text-4xl md:text-7xl block hover:text-acid transition-colors" style="-webkit-text-stroke: 1px black; color: white;">
+                        GET IN TOUCH
+                    </a>
+                    <a href="mailto:nixonvaldo.valero@gmail.com" class="text-xl md:text-3xl font-bold mt-4 block border-b-2 border-black">nixonvaldo.valero@gmail.com</a>
                 </div>
-                <div class="md:col-span-5 grid grid-cols-2 gap-8">
-                    <div>
-                        <p class="text-meta opacity-40 mb-4">Instagram</p>
-                        <a href="#" class="font-title uppercase text-sm hover:underline">@novapizolero</a>
-                    </div>
-                    <div>
-                        <p class="text-meta opacity-40 mb-4">Behance</p>
-                        <a href="#" class="font-title uppercase text-sm hover:underline">nixonvalero</a>
-                    </div>
+
+                <div class="flex flex-col gap-4 text-xs font-bold uppercase tracking-widest reveal">
+                    <a href="#" class="hover:underline">Instagram / @novapizolero</a>
+                    <a href="#" class="hover:underline">Behance / nixonvalero</a>
+                    <a href="#" class="hover:underline">LinkedIn / nixon-valero</a>
                 </div>
             </div>
+
+            <div class="mt-48 flex flex-col md:flex-row justify-between items-end opacity-40 text-[10px] font-bold uppercase tracking-widest">
+                <p>© 2026 NIXON VALERO — DESIGN & ART DIRECTION</p>
+                <p>CUCUTA, COLOMBIA • 7.8939° N, 72.5078° W</p>
+            </div>
         </div>
-        <div class="mt-48 text-meta opacity-20 text-center">
-            Nixon Valero — © 2026 — All Rights Reserved
-        </div>
+        
+        <!-- Big background text for aesthetics -->
+        <span class="absolute -bottom-10 -right-20 text-[25vw] font-title opacity-[0.03] pointer-events-none uppercase">NIXON</span>
     </footer>
 
     <script>
-        const observerOptions = { threshold: 0.1 };
+        // Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Add grow effect for cursor on links
+        document.querySelectorAll('a, button, .project-card').forEach(link => {
+            link.addEventListener('mouseenter', () => cursor.style.transform = 'scale(4)');
+            link.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+        });
+
+        // Intersection Observer for Reveal
+        const observerOptions = { threshold: 0.15 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -283,6 +347,15 @@
         }, observerOptions);
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Smooth Parallax for Images
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.project-card img').forEach(img => {
+                const speed = 0.05;
+                img.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
     </script>
 </body>
 </html>
