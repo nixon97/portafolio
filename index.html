@@ -209,7 +209,7 @@
         </div>
     </section>
 
-    <!-- 4. ILUSTRACIÓN (Fondo Blanco - Grid 2x2 Estilo Infografía) -->
+    <!-- 4. ILUSTRACIÓN (Fondo Blanco - Grid Ajustado a petición) -->
     <!-- REORDENADO: Ahora va después de Infografía -->
     <section class="bg-white text-black py-24 px-6 md:px-12">
         
@@ -220,22 +220,19 @@
             <span class="text-xs font-sans font-bold uppercase tracking-widest opacity-50">/ Selected Works</span>
         </div>
 
-        <!-- Grid 2x2 Estético con contenedores cuadrados -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            <!-- Fila 1 -->
-            <div class="reveal image-wrapper aspect-square">
-                <img src="https://github.com/nixon97/portafolio/blob/main/ed25b15b-9c2e-4a6a-aada-329b67d161cc.jpg?raw=true" class="art-img max-h-full max-w-full" alt="Ilustración 1">
+        <!-- Grid Layout sin espacios (pegadas) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+            <!-- Fila 1: Dos imágenes pequeñas -->
+            <div class="reveal image-wrapper">
+                <img src="https://github.com/nixon97/portafolio/blob/main/ed25b15b-9c2e-4a6a-aada-329b67d161cc.jpg?raw=true" class="art-img" alt="Ilustración 1">
             </div>
-            <div class="reveal image-wrapper aspect-square">
-                <img src="https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true" class="art-img max-h-full max-w-full" alt="Ilustración 2">
+            <div class="reveal image-wrapper">
+                <img src="https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true" class="art-img" alt="Ilustración 2">
             </div>
             
-            <!-- Fila 2 -->
-            <div class="reveal image-wrapper aspect-square">
-                <img src="https://github.com/nixon97/portafolio/blob/main/32d84d57-6005-4d27-82fe-dac18af42c62.jpg?raw=true" class="art-img max-h-full max-w-full" alt="Ilustración 3">
-            </div>
-            <div class="reveal image-wrapper aspect-square">
-                <img src="image_06ac38.png" class="art-img max-h-full max-w-full" alt="Ilustración 4" onerror="this.src='https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true'">
+            <!-- Fila 2: Una imagen grande que ocupa todo el ancho -->
+            <div class="reveal image-wrapper md:col-span-2">
+                <img src="https://github.com/nixon97/portafolio/blob/main/32d84d57-6005-4d27-82fe-dac18af42c62.jpg?raw=true" class="art-img" alt="Ilustración 3">
             </div>
         </div>
     </section>
