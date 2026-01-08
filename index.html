@@ -83,9 +83,10 @@
             text-transform: uppercase;
         }
 
+        /* TÍTULO MÁS GRANDE */
         .hero-title-size {
-            font-size: clamp(3.5rem, 13vw, 15rem);
-            line-height: 0.9;
+            font-size: clamp(5rem, 18vw, 22rem); /* AUMENTADO significativamente */
+            line-height: 0.85;
         }
 
         .section-header {
@@ -97,7 +98,7 @@
 
         .outline-text-black {
             color: transparent;
-            -webkit-text-stroke: 1.5px #000;
+            -webkit-text-stroke: 2px #000; /* Borde un poco más grueso para soportar el tamaño */
             transition: all 0.3s ease;
         }
         .outline-text-black:hover {
@@ -115,10 +116,41 @@
             -webkit-text-stroke: 0px;
         }
 
+        /* --- SEPARADORES TÉCNICOS --- */
+        .tech-separator {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            opacity: 0.4;
+            margin: 4rem 0;
+        }
+        .tech-line {
+            height: 1px;
+            background: #ffffff;
+            flex-grow: 1;
+            margin: 0 1rem;
+        }
+        .tech-node {
+            width: 6px;
+            height: 6px;
+            background-color: #ccff00; /* Acid color */
+            border-radius: 50%; /* Puntos redondos */
+            box-shadow: 0 0 10px #ccff00;
+        }
+        .tech-pattern {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: #ffffff;
+            opacity: 0.5;
+        }
+
+
         /* --- BEHANCE CARDS & LAYOUT --- */
         .glass-card {
             background: rgba(20, 20, 20, 0.4);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(4px); 
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: border-color 0.4s ease, transform 0.4s ease;
         }
@@ -168,12 +200,6 @@
         .glass-card:hover .image-zoom-container img {
             transform: scale(1.05);
         }
-
-        /* Separadores verticales */
-        .vertical-line {
-            width: 1px;
-            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.2), transparent);
-        }
     </style>
 </head>
 <body class="selection:bg-acid selection:text-black">
@@ -185,8 +211,10 @@
         <div class="vignette"></div>
     </div>
 
-    <!-- 1. PORTADA / HERO (Mantenida intacta) -->
-    <header class="min-h-screen flex flex-col justify-center px-6 md:px-12 relative bg-acid text-black z-10">
+    <!-- 1. PORTADA / HERO (AJUSTADO: justify-end + pb-12 para bajar el texto) -->
+    <header class="min-h-screen flex flex-col justify-end pb-16 md:pb-24 px-6 md:px-12 relative bg-acid text-black z-10 overflow-hidden">
+        
+        <!-- Elemento decorativo flotante (Círculo giratorio) -->
         <div class="absolute top-12 right-6 md:right-12 animate-spin-slow opacity-20 pointer-events-none">
             <svg width="120" height="120" viewBox="0 0 100 100">
                 <path id="circlePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
@@ -196,15 +224,16 @@
             </svg>
         </div>
 
-        <div class="reveal active z-10">
-            <p class="font-bold tracking-[0.3em] mb-4 text-xs uppercase border-b border-black/20 pb-2 inline-block">PORTAFOLIO</p>
+        <div class="reveal active z-10 w-full">
+            <p class="font-bold tracking-[0.3em] mb-2 text-xs uppercase border-b border-black/20 pb-2 inline-block">PORTAFOLIO</p>
             
-            <h1 class="fat-title hero-title-size text-black">
+            <!-- TÍTULO MASIVO -->
+            <h1 class="fat-title hero-title-size text-black -ml-1 md:-ml-2">
                 DISEÑO<br>
-                <span class="outline-text-black" style="-webkit-text-stroke: 1px black;">GRÁFICO</span>
+                <span class="outline-text-black">GRÁFICO</span>
             </h1>
             
-            <div class="mt-12 flex flex-col md:flex-row justify-between items-end gap-8 border-t border-black/10 pt-8">
+            <div class="mt-8 flex flex-col md:flex-row justify-between items-end gap-8 border-t border-black/10 pt-6">
                 <p class="font-sans font-medium text-sm md:text-base uppercase tracking-widest">
                     Nixon Valero
                 </p>
@@ -215,15 +244,14 @@
         </div>
     </header>
 
-    <!-- 2. PERFIL (Mantenido intacto visualmente) -->
-    <section class="py-24 px-6 md:px-12 relative z-10 border-b border-white/10 backdrop-blur-sm">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+    <!-- 2. PERFIL -->
+    <section class="py-16 px-6 md:px-12 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
             <div class="md:col-span-4 reveal">
                 <div class="relative group">
-                    <!-- Marco decorativo -->
-                    <div class="absolute inset-0 border border-acid translate-x-3 translate-y-3 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="absolute inset-0 border border-acid translate-x-3 translate-y-3 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <img src="https://github.com/nixon97/portafolio/blob/main/Gemini_Generated_Image_t190lnt190lnt190.png?raw=true" 
-                         alt="Perfil" class="w-full grayscale group-hover:grayscale-0 transition duration-700 rounded-sm relative z-10">
+                         alt="Perfil" class="w-full grayscale group-hover:grayscale-0 transition duration-700 rounded-3xl relative z-10">
                 </div>
             </div>
             
@@ -236,8 +264,6 @@
                     <p>
                         Desde Cúcuta, Colombia, desarrollo sistemas gráficos que fusionan la estética contemporánea con la funcionalidad estratégica. Busco que cada pieza no solo decore, sino que construya marca.
                     </p>
-                    
-                    <!-- Pequeñas estadísticas o skills -->
                     <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/10">
                         <div>
                             <span class="block text-2xl font-title text-white">4+</span>
@@ -257,12 +283,20 @@
         </div>
     </section>
 
-    <!-- AQUÍ EMPIEZA EL REDISEÑO ESTILO BEHANCE -->
+    <!-- SEPARADOR TÉCNICO 1 -->
+    <div class="px-6 md:px-12 relative z-10 reveal">
+        <div class="tech-separator">
+            <div class="tech-node"></div>
+            <div class="tech-line"></div>
+            <div class="tech-pattern">/// DATA ///</div>
+            <div class="tech-line"></div>
+            <div class="tech-node"></div>
+        </div>
+    </div>
 
-    <!-- 3. INFOGRAFÍA / DATA VIZ (Estilo Dashboard / Grid Técnico) -->
-    <section class="py-24 px-6 md:px-12 relative z-10">
-        <!-- Header de Sección -->
-        <div class="reveal flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+    <!-- 3. INFOGRAFÍA / DATA VIZ -->
+    <section class="py-12 px-6 md:px-12 relative z-10">
+        <div class="reveal flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
             <div>
                 <span class="text-acid text-xs font-bold tracking-[0.2em] mb-2 block">01 — VISUAL DATA</span>
                 <h2 class="section-header outline-text m-0">INFOGRAFÍA</h2>
@@ -272,16 +306,11 @@
             </p>
         </div>
 
-        <!-- Grid Asimétrico (Bento Grid) -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-            
-            <!-- Item Principal Grande -->
-            <div class="md:col-span-8 reveal glass-card p-2 rounded-sm group relative">
-                <div class="image-zoom-container h-full w-full bg-black/50 overflow-hidden rounded-sm relative aspect-video md:aspect-auto">
+            <div class="md:col-span-8 reveal glass-card p-2 rounded-3xl group relative">
+                <div class="image-zoom-container h-full w-full bg-black/50 overflow-hidden rounded-2xl relative aspect-video md:aspect-auto">
                      <img src="https://github.com/nixon97/portafolio/blob/main/3.png?raw=true" class="w-full h-full object-cover opacity-90 group-hover:opacity-100" alt="Infografía Principal">
-                     
-                     <!-- Overlay de información on hover -->
-                     <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500 flex justify-between items-end">
+                     <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500 flex justify-between items-end rounded-b-2xl">
                         <div>
                             <h3 class="font-title text-2xl text-white mb-1">Análisis de Mercado</h3>
                             <div class="flex gap-2 mt-2">
@@ -294,31 +323,27 @@
                 </div>
             </div>
 
-            <!-- Columna lateral con 2 items -->
             <div class="md:col-span-4 flex flex-col gap-6">
-                
-                <!-- Item Pequeño 1 -->
-                <div class="reveal glass-card p-2 rounded-sm group h-full">
-                    <div class="image-zoom-container h-full w-full bg-black/50 overflow-hidden rounded-sm relative aspect-square md:aspect-auto">
+                <div class="reveal glass-card p-2 rounded-3xl group h-full">
+                    <div class="image-zoom-container h-full w-full bg-black/50 overflow-hidden rounded-2xl relative aspect-square md:aspect-auto">
                         <img src="https://github.com/nixon97/portafolio/blob/main/1.png?raw=true" class="w-full h-full object-cover" alt="Data 1">
                         <div class="absolute top-4 left-4">
-                             <span class="bg-black/70 backdrop-blur text-xs font-sans px-2 py-1 text-acid border border-acid/30">FIG. 01</span>
+                             <span class="bg-black/70 backdrop-blur text-xs font-sans px-2 py-1 text-acid border border-acid/30 rounded-full">FIG. 01</span>
                         </div>
                     </div>
-                    <div class="pt-3 px-1">
+                    <div class="pt-3 px-2 pb-1">
                         <h4 class="font-title text-lg">Estadística Social</h4>
                     </div>
                 </div>
 
-                <!-- Item Pequeño 2 -->
-                <div class="reveal glass-card p-2 rounded-sm group h-full">
-                    <div class="image-zoom-container h-full w-full bg-black/50 overflow-hidden rounded-sm relative aspect-square md:aspect-auto">
+                <div class="reveal glass-card p-2 rounded-3xl group h-full">
+                    <div class="image-zoom-container h-full w-full bg-black/50 overflow-hidden rounded-2xl relative aspect-square md:aspect-auto">
                         <img src="https://github.com/nixon97/portafolio/blob/main/2.png?raw=true" class="w-full h-full object-cover" alt="Data 2">
                         <div class="absolute top-4 left-4">
-                             <span class="bg-black/70 backdrop-blur text-xs font-sans px-2 py-1 text-acid border border-acid/30">FIG. 02</span>
+                             <span class="bg-black/70 backdrop-blur text-xs font-sans px-2 py-1 text-acid border border-acid/30 rounded-full">FIG. 02</span>
                         </div>
                     </div>
-                    <div class="pt-3 px-1">
+                    <div class="pt-3 px-2 pb-1">
                         <h4 class="font-title text-lg">Procesos Industriales</h4>
                     </div>
                 </div>
@@ -326,26 +351,35 @@
         </div>
     </section>
 
-    <!-- 4. ILUSTRACIÓN (Estilo Galería / Tarjetas Verticales) -->
-    <section class="py-24 px-6 md:px-12 relative z-10 border-t border-white/5">
-        
-        <div class="reveal mb-16 text-center">
+    <!-- SEPARADOR TÉCNICO 2 -->
+    <div class="px-6 md:px-12 relative z-10 reveal">
+        <div class="tech-separator">
+            <div class="tech-node"></div>
+            <div class="tech-line"></div>
+            <div class="tech-pattern">/// ART ///</div>
+            <div class="tech-line"></div>
+            <div class="tech-node"></div>
+        </div>
+    </div>
+
+    <!-- 4. ILUSTRACIÓN -->
+    <section class="py-12 px-6 md:px-12 relative z-10">
+        <div class="reveal mb-10 text-center">
             <span class="text-acid text-xs font-bold tracking-[0.2em] mb-2 block">02 — ARTWORK</span>
-            <h2 class="section-header outline-text mb-4 inline-block">ILUSTRACIÓN</h2>
+            <h2 class="section-header outline-text mb-2 inline-block">ILUSTRACIÓN</h2>
             <div class="w-24 h-1 bg-acid mx-auto"></div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            
             <!-- Card Ilustración 1 -->
-            <div class="reveal glass-card p-4 rounded-sm flex flex-col group">
-                <div class="image-zoom-container aspect-[3/4] mb-4 rounded-sm relative overflow-hidden bg-gray-900">
+            <div class="reveal glass-card p-3 rounded-3xl flex flex-col group">
+                <div class="image-zoom-container aspect-[3/4] mb-4 rounded-2xl relative overflow-hidden bg-gray-900">
                     <img src="https://github.com/nixon97/portafolio/blob/main/ed25b15b-9c2e-4a6a-aada-329b67d161cc.jpg?raw=true" class="w-full h-full object-cover" alt="Ilustración">
                     <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span class="text-acid font-title text-lg tracking-widest border border-acid px-4 py-2">VIEW</span>
+                        <span class="text-acid font-title text-lg tracking-widest border border-acid px-4 py-2 rounded-full">VIEW</span>
                     </div>
                 </div>
-                <div class="mt-auto">
+                <div class="mt-auto px-2 pb-2">
                     <h3 class="font-title text-xl text-white mb-2">Character Design</h3>
                     <p class="text-xs text-gray-400 font-sans mb-3 line-clamp-2">Exploración de personajes para narrativa gráfica cyberpunk.</p>
                     <div class="flex flex-wrap gap-2">
@@ -356,14 +390,14 @@
             </div>
 
             <!-- Card Ilustración 2 -->
-            <div class="reveal glass-card p-4 rounded-sm flex flex-col group lg:mt-12"> <!-- lg:mt-12 crea efecto cascada -->
-                <div class="image-zoom-container aspect-[3/4] mb-4 rounded-sm relative overflow-hidden bg-gray-900">
+            <div class="reveal glass-card p-3 rounded-3xl flex flex-col group"> 
+                <div class="image-zoom-container aspect-[3/4] mb-4 rounded-2xl relative overflow-hidden bg-gray-900">
                     <img src="https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true" class="w-full h-full object-cover" alt="Ilustración">
                     <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span class="text-acid font-title text-lg tracking-widest border border-acid px-4 py-2">VIEW</span>
+                        <span class="text-acid font-title text-lg tracking-widest border border-acid px-4 py-2 rounded-full">VIEW</span>
                     </div>
                 </div>
-                <div class="mt-auto">
+                <div class="mt-auto px-2 pb-2">
                     <h3 class="font-title text-xl text-white mb-2">Neon City</h3>
                     <p class="text-xs text-gray-400 font-sans mb-3 line-clamp-2">Paisajismo urbano nocturno con paleta de colores ácidos.</p>
                     <div class="flex flex-wrap gap-2">
@@ -374,14 +408,14 @@
             </div>
 
             <!-- Card Ilustración 3 -->
-            <div class="reveal glass-card p-4 rounded-sm flex flex-col group">
-                <div class="image-zoom-container aspect-[3/4] mb-4 rounded-sm relative overflow-hidden bg-gray-900">
+            <div class="reveal glass-card p-3 rounded-3xl flex flex-col group">
+                <div class="image-zoom-container aspect-[3/4] mb-4 rounded-2xl relative overflow-hidden bg-gray-900">
                     <img src="https://github.com/nixon97/portafolio/blob/main/32d84d57-6005-4d27-82fe-dac18af42c62.jpg?raw=true" class="w-full h-full object-cover" alt="Ilustración">
                     <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span class="text-acid font-title text-lg tracking-widest border border-acid px-4 py-2">VIEW</span>
+                        <span class="text-acid font-title text-lg tracking-widest border border-acid px-4 py-2 rounded-full">VIEW</span>
                     </div>
                 </div>
-                <div class="mt-auto">
+                <div class="mt-auto px-2 pb-2">
                     <h3 class="font-title text-xl text-white mb-2">Surreal Mind</h3>
                     <p class="text-xs text-gray-400 font-sans mb-3 line-clamp-2">Composición onírica mezclando elementos orgánicos.</p>
                     <div class="flex flex-wrap gap-2">
@@ -392,14 +426,14 @@
             </div>
 
              <!-- Card Ilustración 4 -->
-             <div class="reveal glass-card p-4 rounded-sm flex flex-col group lg:mt-12">
-                <div class="image-zoom-container aspect-[3/4] mb-4 rounded-sm relative overflow-hidden bg-gray-900">
+             <div class="reveal glass-card p-3 rounded-3xl flex flex-col group">
+                <div class="image-zoom-container aspect-[3/4] mb-4 rounded-2xl relative overflow-hidden bg-gray-900">
                     <img src="https://github.com/nixon97/portafolio/blob/main/ed25b15b-9c2e-4a6a-aada-329b67d161cc.jpg?raw=true" class="w-full h-full object-cover" alt="Ilustración">
                     <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span class="text-acid font-title text-lg tracking-widest border border-acid px-4 py-2">VIEW</span>
+                        <span class="text-acid font-title text-lg tracking-widest border border-acid px-4 py-2 rounded-full">VIEW</span>
                     </div>
                 </div>
-                <div class="mt-auto">
+                <div class="mt-auto px-2 pb-2">
                     <h3 class="font-title text-xl text-white mb-2">Cyber Portrait</h3>
                     <p class="text-xs text-gray-400 font-sans mb-3 line-clamp-2">Retrato digital estilizado con técnicas de pincel seco.</p>
                     <div class="flex flex-wrap gap-2">
@@ -408,14 +442,23 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- 5. PRODUCTOS (Estilo Showcase Horizontal Amplio - YA NO ES BLANCO) -->
-    <section class="py-24 px-6 md:px-12 relative z-10 bg-gradient-to-b from-transparent to-dark/90 border-t border-white/5">
-        
-        <div class="reveal mb-12 flex items-center justify-between">
+    <!-- SEPARADOR TÉCNICO 3 -->
+    <div class="px-6 md:px-12 relative z-10 reveal">
+        <div class="tech-separator">
+            <div class="tech-node"></div>
+            <div class="tech-line"></div>
+            <div class="tech-pattern">/// PROD ///</div>
+            <div class="tech-line"></div>
+            <div class="tech-node"></div>
+        </div>
+    </div>
+
+    <!-- 5. PRODUCTOS -->
+    <section class="py-12 px-6 md:px-12 relative z-10 bg-gradient-to-b from-transparent to-dark/90">
+        <div class="reveal mb-8 flex items-center justify-between">
             <div>
                 <span class="text-acid text-xs font-bold tracking-[0.2em] mb-2 block">03 — PACKAGING & EDITORIAL</span>
                 <h2 class="section-header outline-text m-0">PRODUCTOS</h2>
@@ -428,27 +471,22 @@
             </div>
         </div>
 
-        <div class="flex flex-col gap-12">
-            
-            <!-- Producto 1: Layout Horizontal -->
-            <div class="reveal glass-card p-0 rounded-sm overflow-hidden group">
+        <div class="flex flex-col gap-10">
+            <!-- Producto 1 -->
+            <div class="reveal glass-card p-0 rounded-3xl overflow-hidden group">
                 <div class="grid grid-cols-1 md:grid-cols-2">
                     <div class="bg-gray-200 relative overflow-hidden aspect-square md:aspect-auto">
-                        <!-- Imagen con fondo claro para que resalte el producto, pero dentro del contenedor oscuro -->
                         <img src="https://github.com/nixon97/portafolio/blob/main/maqueta%20presentacion%20librox.png?raw=true" class="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition duration-700" alt="Libro">
                         <div class="absolute top-0 right-0 p-4">
-                            <span class="text-black font-bold text-xs border border-black px-2 py-1">EDITORIAL</span>
+                            <span class="text-black font-bold text-xs border border-black px-2 py-1 rounded-full">EDITORIAL</span>
                         </div>
                     </div>
                     <div class="p-8 md:p-12 flex flex-col justify-center border-l border-white/10 relative">
-                        <!-- Fondo sutil decorativo -->
                         <div class="absolute top-0 right-0 text-[10rem] font-title text-white/5 pointer-events-none leading-none -mt-8 -mr-8">01</div>
-                        
                         <h3 class="font-title text-4xl text-white mb-4">Libro Álbum<br><span class="text-acid">Edición Especial</span></h3>
                         <p class="text-gray-400 font-sans leading-relaxed mb-8">
                             Diseño integral de maquetación, selección tipográfica y acabados de impresión. Un objeto de colección pensado para ser tocado y leído.
                         </p>
-                        
                         <div class="flex flex-col gap-4">
                             <div class="flex items-center gap-4 text-sm text-gray-300 border-b border-white/10 pb-2">
                                 <span class="w-24 font-bold text-gray-500 uppercase text-xs">Rol</span>
@@ -459,26 +497,22 @@
                                 <span>2025</span>
                             </div>
                         </div>
-
-                        <button class="mt-8 self-start px-6 py-3 border border-acid text-acid hover:bg-acid hover:text-black transition uppercase text-xs tracking-widest font-bold">
+                        <button class="mt-8 self-start px-6 py-3 border border-acid text-acid hover:bg-acid hover:text-black transition uppercase text-xs tracking-widest font-bold rounded-full">
                             Ver Proyecto Completo
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Producto 2: Layout Horizontal Invertido -->
-            <div class="reveal glass-card p-0 rounded-sm overflow-hidden group">
+            <!-- Producto 2 -->
+            <div class="reveal glass-card p-0 rounded-3xl overflow-hidden group">
                 <div class="grid grid-cols-1 md:grid-cols-2">
-                    <!-- Contenido (Orden 2 en móvil, 1 en desktop) -->
                     <div class="p-8 md:p-12 flex flex-col justify-center border-r border-white/10 relative order-2 md:order-1">
                         <div class="absolute top-0 left-0 text-[10rem] font-title text-white/5 pointer-events-none leading-none -mt-8 -ml-8">02</div>
-                        
                         <h3 class="font-title text-4xl text-white mb-4">Juego de Mesa<br><span class="text-acid">Experiencia Lúdica</span></h3>
                         <p class="text-gray-400 font-sans leading-relaxed mb-8">
                             Diseño de packaging, tablero y experiencia de usuario física (Physical UX). Creación de un sistema visual coherente para todas las piezas del juego.
                         </p>
-                        
                         <div class="flex flex-col gap-4">
                             <div class="flex items-center gap-4 text-sm text-gray-300 border-b border-white/10 pb-2">
                                 <span class="w-24 font-bold text-gray-500 uppercase text-xs">Rol</span>
@@ -489,51 +523,43 @@
                                 <span>Cartón Ecológico</span>
                             </div>
                         </div>
-
-                        <button class="mt-8 self-start px-6 py-3 border border-acid text-acid hover:bg-acid hover:text-black transition uppercase text-xs tracking-widest font-bold">
+                        <button class="mt-8 self-start px-6 py-3 border border-acid text-acid hover:bg-acid hover:text-black transition uppercase text-xs tracking-widest font-bold rounded-full">
                             Ver Detalles
                         </button>
                     </div>
-
-                    <!-- Imagen (Orden 1 en móvil, 2 en desktop) -->
                     <div class="bg-gray-200 relative overflow-hidden aspect-square md:aspect-auto order-1 md:order-2">
                         <img src="https://github.com/nixon97/portafolio/blob/main/bed67c2e-8006-48f9-9171-7fbda5d729a9.jpg?raw=true" class="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition duration-700" alt="Juego">
                         <div class="absolute top-0 left-0 p-4">
-                            <span class="text-black font-bold text-xs border border-black px-2 py-1">PACKAGING</span>
+                            <span class="text-black font-bold text-xs border border-black px-2 py-1 rounded-full">PACKAGING</span>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- 6. FOOTER (Ahora oscuro e integrado) -->
-    <footer class="py-24 px-6 md:px-12 bg-black text-white relative z-10 border-t border-acid">
+    <!-- FOOTER -->
+    <footer class="py-16 px-6 md:px-12 bg-black text-white relative z-10 border-t border-acid">
         <div class="reveal">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div>
                     <p class="text-[10px] uppercase tracking-widest font-bold text-acid mb-8">Work with me</p>
-                    
                     <a href="mailto:nixonvaldo.valero@gmail.com" class="block group w-fit">
                         <h2 class="fat-title text-white group-hover:text-acid transition-colors duration-300" style="font-size: clamp(2rem, 6vw, 6rem); line-height: 0.9;">
                             HABLEMOS
                         </h2>
                         <div class="h-1 w-0 bg-acid group-hover:w-full transition-all duration-300"></div>
                     </a>
-                    
                     <p class="mt-8 text-gray-400 font-sans max-w-sm">
                         Siempre abierto a nuevos retos visuales, colaboraciones artísticas y proyectos que requieran una visión única.
                     </p>
                 </div>
-
                 <div class="flex flex-col justify-between items-end text-right">
                     <ul class="space-y-4">
                         <li><a href="#" class="font-title text-2xl hover:text-acid transition">Behance ↗</a></li>
                         <li><a href="#" class="font-title text-2xl hover:text-acid transition">Instagram ↗</a></li>
                         <li><a href="#" class="font-title text-2xl hover:text-acid transition">LinkedIn ↗</a></li>
                     </ul>
-                    
                     <div class="mt-12 md:mt-0">
                         <a href="mailto:nixonvaldo.valero@gmail.com" class="text-sm font-sans tracking-wide border-b border-gray-700 pb-1 hover:text-acid hover:border-acid transition">
                             nixonvaldo.valero@gmail.com
@@ -541,7 +567,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="mt-24 pt-8 border-t border-gray-900 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold uppercase tracking-widest text-gray-600">
                 <div>© 2026 Nixon Valero — Design Portfolio</div>
                 <div class="mt-4 md:mt-0">Cúcuta, Colombia</div>
@@ -549,32 +574,24 @@
         </div>
     </footer>
 
-    <!-- SCRIPT DE ANIMACIÓN DE CONSTELACIONES (INTACTO) -->
+    <!-- SCRIPT DE ANIMACIÓN (INTACTO) -->
     <script>
         const canvas = document.getElementById('constellationCanvas');
         const ctx = canvas.getContext('2d');
-
-        // CONFIGURACIÓN V12
         const CONFIG = {
             distantStarCount: 1800, 
             neonStarCount: 42,      
             neonColor: '#dfff00',
-            
-            // Lógica de Constelaciones (Anti-Telaraña)
             minSegmentLength: 40,        
             maxSegmentLength: 200, 
-            
-            // Densidad de distribución de estrellas blancas
             gridCols: 12, 
             gridRows: 8
         };
-
         let width, height;
         let distantStars = [];
         let allPoints = []; 
         let neonStars = [];
         let connections = []; 
-
         class DistantStar {
             constructor() {
                 this.x = Math.random() * width;
@@ -589,7 +606,6 @@
                 ctx.fill();
             }
         }
-
         class WhiteStar {
             constructor(x, y) {
                 this.x = x || Math.random() * width;
@@ -605,7 +621,6 @@
                 ctx.fill();
             }
         }
-
         class NeonStar {
             constructor() {
                 this.x = Math.random() * width;
@@ -615,7 +630,6 @@
                 this.points = 6; 
                 this.rotation = Math.random() * Math.PI;
             }
-
             draw() {
                 ctx.save();
                 ctx.fillStyle = CONFIG.neonColor;
@@ -635,33 +649,25 @@
                 ctx.restore();
             }
         }
-
         function init() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
             generate();
             drawScene();
         }
-
         function generate() {
             distantStars = [];
             allPoints = [];
             neonStars = [];
             connections = [];
-
-            // 1. Fondo Galáctico
             for (let i = 0; i < CONFIG.distantStarCount; i++) {
                 distantStars.push(new DistantStar());
             }
-
-            // 2. ESTRELLAS BLANCAS CON GRID
             const colSize = width / CONFIG.gridCols;
             const rowSize = height / CONFIG.gridRows;
-
             for (let r = 0; r < CONFIG.gridRows; r++) {
                 for (let c = 0; c < CONFIG.gridCols; c++) {
                     const starsInCell = Math.random() > 0.3 ? 2 : 1;
-                    
                     for(let k=0; k<starsInCell; k++) {
                         const posX = (c * colSize) + (Math.random() * colSize);
                         const posY = (r * rowSize) + (Math.random() * rowSize);
@@ -669,58 +675,43 @@
                     }
                 }
             }
-
-            // 3. Estrellas Neón
             const starCount = window.innerWidth < 800 ? CONFIG.neonStarCount * 0.6 : CONFIG.neonStarCount;
             for (let i = 0; i < starCount; i++) {
                 neonStars.push(new NeonStar());
             }
-
-            // 4. CONSTELACIONES LIMPIAS
             let shuffledPoints = [...allPoints].sort(() => Math.random() - 0.5);
-            
             for (let i = 0; i < shuffledPoints.length; i++) {
                 let startPoint = shuffledPoints[i];
                 if (startPoint.isUsed) continue;
-
                 const shapeWeight = Math.random() * 1.5 + 0.5;
                 let candidates = [];
-                
                 for (let j = 0; j < allPoints.length; j++) {
                     const p = allPoints[j];
                     if (p === startPoint || p.isUsed) continue; 
-
                     const dist = Math.hypot(p.x - startPoint.x, p.y - startPoint.y);
                     if (dist < CONFIG.maxSegmentLength && dist > CONFIG.minSegmentLength) {
                         candidates.push({ point: p, dist: dist });
                     }
                 }
-
                 if (candidates.length === 0) continue;
-
                 candidates.sort((a, b) => a.dist - b.dist);
                 const nextPointIdx = Math.floor(Math.random() * Math.min(3, candidates.length));
                 const nextPoint = candidates[nextPointIdx].point;
-
                 connections.push({ start: startPoint, end: nextPoint, weight: shapeWeight });
                 startPoint.isUsed = true;
                 nextPoint.isUsed = true;
-
                 if (Math.random() > 0.5) {
                     const fromStart = Math.random() > 0.5; 
                     const pivotPoint = fromStart ? startPoint : nextPoint;
-
                     let thirdCandidates = [];
                     for (let k = 0; k < allPoints.length; k++) {
                         const p = allPoints[k];
                         if (p.isUsed) continue; 
-
                         const dist = Math.hypot(p.x - pivotPoint.x, p.y - pivotPoint.y);
                         if (dist < CONFIG.maxSegmentLength && dist > CONFIG.minSegmentLength) {
                             thirdCandidates.push({ point: p, dist: dist });
                         }
                     }
-
                     if (thirdCandidates.length > 0) {
                         thirdCandidates.sort((a, b) => a.dist - b.dist);
                         const thirdPoint = thirdCandidates[0].point; 
@@ -730,17 +721,11 @@
                 }
             }
         }
-
         function drawScene() {
             ctx.clearRect(0, 0, width, height);
-
-            // 1. Fondo Galáctico
             distantStars.forEach(ds => ds.draw());
-
-            // 2. LÍNEAS
             ctx.strokeStyle = 'rgba(230, 230, 230, 0.35)'; 
             ctx.setLineDash([4, 8]); 
-
             connections.forEach(conn => {
                 ctx.lineWidth = conn.weight; 
                 ctx.beginPath();
@@ -748,25 +733,16 @@
                 ctx.lineTo(conn.end.x, conn.end.y);
                 ctx.stroke();
             });
-            
             ctx.setLineDash([]); 
-
-            // 3. Puntos Blancos
             allPoints.forEach(p => p.draw());
-
-            // 4. Estrellas Neón
             neonStars.forEach(s => s.draw());
         }
-
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(init, 200);
         });
-
         init();
-
-        // Intersection Observer para las animaciones del contenido
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -774,7 +750,6 @@
                 }
             });
         }, { threshold: 0.1 });
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
