@@ -14,8 +14,8 @@
                     colors: {
                         'acid': '#ccff00', 
                         'dark': '#050505',
-                        'paper': '#f0f0f0', /* Nuevo color base para la zona de trabajo */
-                        'ink': '#111111',   /* Negro suave para textos */
+                        'paper': '#f8f8f8', 
+                        'ink': '#111111', 
                     },
                     fontFamily: {
                         sans: ['Space Grotesk', 'sans-serif'],
@@ -30,7 +30,7 @@
     </script>
     <style>
         body {
-            background-color: #0d0d0d; /* Fondo base oscuro */
+            background-color: #0d0d0d;
             color: #ffffff;
             overflow-x: hidden;
         }
@@ -75,10 +75,10 @@
             font-size: clamp(3rem, 8vw, 6rem);
             line-height: 0.9;
             text-transform: uppercase;
-            color: #111; /* Negro Tinta */
+            color: #111; 
         }
 
-        /* ESTILOS DE OUTLINE PARA FONDO CLARO */
+        /* OUTLINES */
         .outline-text-light {
             color: transparent;
             -webkit-text-stroke: 1.5px #111;
@@ -89,41 +89,45 @@
             -webkit-text-stroke: 0px;
         }
         
-        /* ESTILOS DE OUTLINE PARA FONDO OSCURO (HERO) */
         .outline-text-dark {
             color: transparent;
             -webkit-text-stroke: 2px #000;
         }
 
-        /* BRUTALIST GRID & BORDERS */
-        .brutalist-border {
-            border: 1px solid rgba(0,0,0,0.1);
+        /* ESTILO BLUEPRINT / LÍNEAS TÉCNICAS */
+        .tech-border-b {
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
-        .brutalist-border-top {
-            border-top: 1px solid rgba(0,0,0,0.15);
+        .tech-border-t {
+            border-top: 1px solid rgba(0,0,0,0.1);
         }
-        .brutalist-border-b {
-            border-bottom: 1px solid rgba(0,0,0,0.15);
+        .tech-border-r {
+            border-right: 1px solid rgba(0,0,0,0.1);
         }
 
-        /* TAGS ESTILO ETIQUETA / STICKER */
-        .sticker-tag {
-            background: #fff;
-            border: 1px solid #000;
-            color: #000;
-            font-family: 'Space Grotesk', monospace;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 4px 12px;
-            box-shadow: 2px 2px 0px #000; /* Sombra dura brutalista */
-            display: inline-block;
-            transform: rotate(-2deg); /* Ligera rotación orgánica */
-            transition: transform 0.3s ease;
+        /* TARJETA TÉCNICA (FRAME) */
+        .tech-card {
+            background: white;
+            padding: 8px; /* Marco blanco */
+            border: 1px solid #e5e5e5;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
         }
-        .sticker-tag:hover {
-            transform: rotate(0deg) scale(1.1);
-            background: #ccff00;
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: #000;
+        }
+
+        /* TAGS TÉCNICOS */
+        .tech-label {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #666;
+            border: 1px solid #eee;
+            padding: 2px 6px;
         }
 
         /* Animaciones */
@@ -139,12 +143,12 @@
 
         .image-zoom-container {
             overflow: hidden;
-            background: #e5e5e5;
+            background: #f0f0f0;
         }
         .image-zoom-container img {
             transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .card-hover:hover .image-zoom-container img {
+        .tech-card:hover .image-zoom-container img {
             transform: scale(1.03);
         }
     </style>
@@ -157,7 +161,7 @@
         <div class="noise-overlay"></div>
     </div>
 
-    <!-- 1. PORTADA / HERO (OSCURO - INTACTO) -->
+    <!-- 1. PORTADA / HERO -->
     <header class="min-h-screen flex flex-col justify-end pb-16 md:pb-24 px-6 md:px-12 relative bg-acid text-black z-10 overflow-hidden">
         <div class="absolute top-12 right-6 md:right-12 animate-spin-slow opacity-20 pointer-events-none">
             <svg width="120" height="120" viewBox="0 0 100 100">
@@ -180,8 +184,8 @@
         </div>
     </header>
 
-    <!-- 2. PERFIL (OSCURO - TRANSICIÓN) -->
-    <section class="py-20 px-6 md:px-12 relative z-10">
+    <!-- 2. PERFIL -->
+    <section class="py-32 px-6 md:px-12 relative z-10">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
             <div class="md:col-span-4 reveal">
                 <div class="relative group">
@@ -201,209 +205,248 @@
     </section>
 
     <!-- ================================================================================== -->
-    <!--  ZONA DE TRABAJO (LIGHT MODE / BRUTALISMO TÉCNICO) -->
+    <!--  ZONA DE TRABAJO (LIGHT MODE / BLUEPRINT) -->
     <!-- ================================================================================== -->
     
-    <main class="relative z-20 bg-[#f4f4f4] text-ink rounded-t-[3rem] -mt-12 pt-24 pb-24 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
+    <!-- TRANSICIÓN RECTA TÉCNICA -->
+    <main class="relative z-20 bg-paper text-ink border-t border-white/20">
         
-        <!-- ELEMENTO DECORATIVO DE CORTE -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-acid w-16 h-16 rounded-full flex items-center justify-center border-4 border-[#0d0d0d]">
-            <span class="text-2xl font-bold">↓</span>
+        <!-- BARRA DE SEPARACIÓN TÉCNICA -->
+        <div class="w-full bg-black text-white py-2 px-6 md:px-12 flex justify-between items-center text-[10px] font-mono tracking-widest uppercase">
+            <span>/// WORKSPACE_INIT ///</span>
+            <span>COORD: 07.8939° N, 72.5078° W</span>
         </div>
 
-        <!-- 3. INFOGRAFÍA (DIAGRAMACIÓN EDITORIAL) -->
-        <section class="px-6 md:px-12 mb-32">
-            <!-- Header Brutalista -->
-            <div class="reveal border-b-2 border-black pb-8 mb-12 flex flex-col md:flex-row justify-between md:items-end">
+        <!-- 3. INFOGRAFÍA -->
+        <section class="px-6 md:px-12 py-24 border-b border-gray-300">
+            <!-- Header Técnico -->
+            <div class="reveal border-b border-black pb-8 mb-12 flex flex-col md:flex-row justify-between md:items-end">
                 <div>
-                    <span class="bg-black text-white px-3 py-1 text-xs font-bold uppercase tracking-widest inline-block mb-4">Sección 01</span>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-3 h-3 bg-acid border border-black"></div>
+                        <span class="text-xs font-bold uppercase tracking-widest">Sección 01</span>
+                    </div>
                     <h2 class="section-header">INFO<br><span class="outline-text-light">GRAFÍA</span></h2>
                 </div>
                 <div class="mt-8 md:mt-0 text-right max-w-sm">
-                    <p class="font-sans font-medium text-sm leading-6">
-                        / VISUALIZACIÓN DE DATOS <br>
-                        Transformando complejidad en claridad visual. Sistemas de información estructurada.
+                    <p class="font-sans font-medium text-sm leading-6 border-l-2 border-acid pl-4 text-left md:text-right md:border-l-0 md:border-r-2 md:pl-0 md:pr-4">
+                        VISUALIZACIÓN DE DATOS <br>
+                        Sistemas de información estructurada y diagramación compleja.
                     </p>
                 </div>
             </div>
 
-            <!-- Layout Asimétrico -->
+            <!-- Layout Principal -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 
-                <!-- Bloque de Texto Lateral -->
-                <div class="lg:col-span-3 reveal flex flex-col justify-between py-4">
+                <!-- Datos Laterales -->
+                <div class="lg:col-span-3 reveal hidden lg:flex flex-col justify-between py-2 border-r border-gray-200 pr-8">
                     <div class="space-y-8">
                         <div>
-                            <h4 class="font-bold uppercase text-xs tracking-widest text-gray-500 mb-2">Cliente</h4>
-                            <p class="font-title text-xl">Global Analytics</p>
+                            <h4 class="font-bold uppercase text-[10px] tracking-widest text-gray-400 mb-2">Cliente</h4>
+                            <p class="font-title text-lg border-b border-black pb-1 inline-block">Global Analytics</p>
                         </div>
                         <div>
-                            <h4 class="font-bold uppercase text-xs tracking-widest text-gray-500 mb-2">Servicios</h4>
+                            <h4 class="font-bold uppercase text-[10px] tracking-widest text-gray-400 mb-2">Software</h4>
                             <div class="flex flex-wrap gap-2">
-                                <span class="border border-gray-300 px-2 py-1 text-xs">Research</span>
-                                <span class="border border-gray-300 px-2 py-1 text-xs">Vector</span>
-                                <span class="border border-gray-300 px-2 py-1 text-xs">UI</span>
+                                <span class="tech-label">Illustrator</span>
+                                <span class="tech-label">Excel</span>
                             </div>
                         </div>
                     </div>
-                    <div class="mt-12 lg:mt-0">
-                         <div class="text-6xl font-title text-black/10">01</div>
-                    </div>
+                    <div class="text-8xl font-title text-gray-100 leading-none">01</div>
                 </div>
 
-                <!-- Imagen Principal -->
-                <div class="lg:col-span-9 reveal">
-                    <div class="card-hover group relative bg-white p-2 border border-gray-200 shadow-xl">
-                        <div class="image-zoom-container aspect-video overflow-hidden border border-black/5">
+                <!-- Contenido -->
+                <div class="lg:col-span-9">
+                    <!-- Imagen Principal -->
+                    <div class="reveal tech-card mb-8">
+                        <div class="image-zoom-container aspect-video border border-gray-200">
                             <img src="https://github.com/nixon97/portafolio/blob/main/3.png?raw=true" class="w-full h-full object-cover" alt="Infografía Main">
                         </div>
-                        
-                        <!-- Etiqueta Flotante Creativa -->
-                        <div class="absolute -top-4 -right-4 sticker-tag bg-acid">
-                            Data Analysis 2026
-                        </div>
-                        
                         <!-- Pie de foto técnico -->
-                        <div class="mt-3 flex justify-between items-center px-2 font-mono text-xs text-gray-500">
-                            <span>FIG 1.1 — MARKET OVERVIEW</span>
-                            <span>[1920 x 1080px]</span>
+                        <div class="mt-3 flex justify-between items-center px-1 font-mono text-[10px] text-gray-500 uppercase tracking-wider">
+                            <span>FIG 1.0 — MARKET OVERVIEW</span>
+                            <span>DATA ANALYSIS 2026</span>
                         </div>
                     </div>
-                </div>
 
-                <!-- Galería Secundaria (Grid Brutalista) -->
-                <div class="lg:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                    <div class="reveal bg-white p-6 border-l-4 border-black shadow-lg">
-                        <h3 class="font-title text-2xl mb-4">Estadística Social</h3>
-                        <div class="image-zoom-container mb-4 grayscale hover:grayscale-0 transition duration-500">
-                            <img src="https://github.com/nixon97/portafolio/blob/main/1.png?raw=true" class="w-full object-cover" alt="Info 2">
+                    <!-- Grid Secundario (AHORA IGUAL AL PRINCIPAL) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Item 1 -->
+                        <div class="reveal tech-card">
+                            <div class="image-zoom-container aspect-square md:aspect-video border border-gray-200 mb-3">
+                                <img src="https://github.com/nixon97/portafolio/blob/main/1.png?raw=true" class="w-full h-full object-cover" alt="Info 2">
+                            </div>
+                            <div class="px-1">
+                                <h3 class="font-title text-lg">Estadística Social</h3>
+                                <div class="flex justify-between items-center mt-2 border-t border-gray-100 pt-2">
+                                    <span class="tech-label">Reporte</span>
+                                    <span class="font-mono text-[10px] text-gray-400">FIG 1.1</span>
+                                </div>
+                            </div>
                         </div>
-                        <p class="font-sans text-sm text-gray-600 leading-relaxed">
-                            Diagramación modular para reportes anuales de impacto social. Uso de paletas monocromáticas.
-                        </p>
-                    </div>
-                    <div class="reveal bg-white p-6 border-l-4 border-black shadow-lg">
-                        <h3 class="font-title text-2xl mb-4">Procesos Industriales</h3>
-                        <div class="image-zoom-container mb-4 grayscale hover:grayscale-0 transition duration-500">
-                            <img src="https://github.com/nixon97/portafolio/blob/main/2.png?raw=true" class="w-full object-cover" alt="Info 3">
+
+                        <!-- Item 2 -->
+                        <div class="reveal tech-card">
+                            <div class="image-zoom-container aspect-square md:aspect-video border border-gray-200 mb-3">
+                                <img src="https://github.com/nixon97/portafolio/blob/main/2.png?raw=true" class="w-full h-full object-cover" alt="Info 3">
+                            </div>
+                            <div class="px-1">
+                                <h3 class="font-title text-lg">Procesos Industriales</h3>
+                                <div class="flex justify-between items-center mt-2 border-t border-gray-100 pt-2">
+                                    <span class="tech-label">Isometría</span>
+                                    <span class="font-mono text-[10px] text-gray-400">FIG 1.2</span>
+                                </div>
+                            </div>
                         </div>
-                        <p class="font-sans text-sm text-gray-600 leading-relaxed">
-                            Simplificación de flujos de trabajo complejos mediante iconografía customizada isómetrica.
-                        </p>
+
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 4. ILUSTRACIÓN (GALERÍA CREATIVA / STICKERS) -->
-        <section class="px-6 md:px-12 mb-32 bg-white py-24 -mx-6 md:-mx-12 brutalist-border-top brutalist-border-b">
+        <!-- 4. ILUSTRACIÓN (REESTRUCTURADO - MISMO ESTILO) -->
+        <section class="px-6 md:px-12 py-24 border-b border-gray-300 bg-white">
             
-            <div class="px-6 md:px-12"> <!-- Container interno -->
-                <div class="reveal mb-16 text-center">
-                    <span class="sticker-tag mb-6 transform rotate-3">Selected Works</span>
-                    <h2 class="section-header text-6xl md:text-8xl">ILUSTRA<br>CIÓN</h2>
+            <!-- Header Técnico (Copiado de Infografía para consistencia) -->
+            <div class="reveal border-b border-black pb-8 mb-12 flex flex-col md:flex-row justify-between md:items-end">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-3 h-3 bg-acid border border-black"></div>
+                        <span class="text-xs font-bold uppercase tracking-widest">Sección 02</span>
+                    </div>
+                    <h2 class="section-header">ILUS<br><span class="outline-text-light">TRACIÓN</span></h2>
                 </div>
+                <div class="mt-8 md:mt-0 text-right max-w-sm">
+                    <p class="font-sans font-medium text-sm leading-6 border-l-2 border-acid pl-4 text-left md:text-right md:border-l-0 md:border-r-2 md:pl-0 md:pr-4">
+                        SELECTED ARTWORKS <br>
+                        Exploración visual, diseño de personajes y entornos digitales.
+                    </p>
+                </div>
+            </div>
 
-                <!-- Masonry / Grid Creativo -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                    
-                    <!-- Item 1 (Rotado) -->
-                    <div class="reveal relative group mt-8">
-                        <div class="relative z-10 bg-white p-2 shadow-[10px_10px_0px_#000] border-2 border-black transform transition group-hover:-translate-y-2 group-hover:shadow-[15px_15px_0px_#ccff00]">
-                            <div class="image-zoom-container aspect-[4/5] border border-black">
-                                <img src="https://github.com/nixon97/portafolio/blob/main/ed25b15b-9c2e-4a6a-aada-329b67d161cc.jpg?raw=true" class="w-full h-full object-cover" alt="Art 1">
-                            </div>
-                            <div class="pt-4 pb-2 px-2">
-                                <h3 class="font-title text-xl uppercase">Cyber Punk</h3>
-                                <p class="text-xs font-mono mt-1 text-gray-500">DIGITAL ART / 2025</p>
-                            </div>
-                        </div>
-                        <!-- Sticker decorativo -->
-                        <div class="absolute -top-6 -left-4 sticker-tag bg-acid z-20 rotate-[-5deg]">Character</div>
+            <!-- Grid Técnico de Ilustraciones -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Ilustración 1 -->
+                <div class="reveal tech-card">
+                    <div class="image-zoom-container aspect-[3/4] border border-gray-200 mb-3">
+                        <img src="https://github.com/nixon97/portafolio/blob/main/ed25b15b-9c2e-4a6a-aada-329b67d161cc.jpg?raw=true" class="w-full h-full object-cover" alt="Art 1">
                     </div>
-
-                    <!-- Item 2 (Desplazado arriba) -->
-                    <div class="reveal relative group md:-mt-12">
-                        <div class="relative z-10 bg-white p-2 shadow-[10px_10px_0px_#000] border-2 border-black transform transition group-hover:-translate-y-2 group-hover:shadow-[15px_15px_0px_#ccff00]">
-                            <div class="image-zoom-container aspect-[4/5] border border-black">
-                                <img src="https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true" class="w-full h-full object-cover" alt="Art 2">
-                            </div>
-                            <div class="pt-4 pb-2 px-2">
-                                <h3 class="font-title text-xl uppercase">Neon City</h3>
-                                <p class="text-xs font-mono mt-1 text-gray-500">ENVIRONMENT / 2025</p>
-                            </div>
-                        </div>
-                        <div class="absolute -bottom-4 -right-4 sticker-tag bg-black text-white z-20 rotate-[3deg]">Concept</div>
-                    </div>
-
-                    <!-- Item 3 -->
-                    <div class="reveal relative group mt-8 lg:mt-16">
-                        <div class="relative z-10 bg-white p-2 shadow-[10px_10px_0px_#000] border-2 border-black transform transition group-hover:-translate-y-2 group-hover:shadow-[15px_15px_0px_#ccff00]">
-                            <div class="image-zoom-container aspect-[4/5] border border-black">
-                                <img src="https://github.com/nixon97/portafolio/blob/main/32d84d57-6005-4d27-82fe-dac18af42c62.jpg?raw=true" class="w-full h-full object-cover" alt="Art 3">
-                            </div>
-                            <div class="pt-4 pb-2 px-2">
-                                <h3 class="font-title text-xl uppercase">Surrealism</h3>
-                                <p class="text-xs font-mono mt-1 text-gray-500">MIXED MEDIA</p>
-                            </div>
+                    <div class="px-1">
+                        <h3 class="font-title text-xl uppercase mb-1">Cyber Punk</h3>
+                        <div class="flex justify-between items-end border-t border-gray-100 pt-2">
+                            <span class="tech-label">Character</span>
+                            <span class="font-mono text-[10px] text-gray-400">DIGITAL / 2025</span>
                         </div>
                     </div>
                 </div>
+
+                <!-- Ilustración 2 -->
+                <div class="reveal tech-card">
+                    <div class="image-zoom-container aspect-[3/4] border border-gray-200 mb-3">
+                        <img src="https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true" class="w-full h-full object-cover" alt="Art 2">
+                    </div>
+                    <div class="px-1">
+                        <h3 class="font-title text-xl uppercase mb-1">Neon City</h3>
+                        <div class="flex justify-between items-end border-t border-gray-100 pt-2">
+                            <span class="tech-label">Environment</span>
+                            <span class="font-mono text-[10px] text-gray-400">CONCEPT / 2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ilustración 3 -->
+                <div class="reveal tech-card">
+                    <div class="image-zoom-container aspect-[3/4] border border-gray-200 mb-3">
+                        <img src="https://github.com/nixon97/portafolio/blob/main/32d84d57-6005-4d27-82fe-dac18af42c62.jpg?raw=true" class="w-full h-full object-cover" alt="Art 3">
+                    </div>
+                    <div class="px-1">
+                        <h3 class="font-title text-xl uppercase mb-1">Surrealism</h3>
+                        <div class="flex justify-between items-end border-t border-gray-100 pt-2">
+                            <span class="tech-label">Mixed Media</span>
+                            <span class="font-mono text-[10px] text-gray-400">ART / 2024</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
-        <!-- 5. PRODUCTOS (CATÁLOGO MINIMALISTA) -->
-        <section class="px-6 md:px-12 mb-12">
-            <div class="reveal flex items-center gap-4 mb-12">
-                <div class="h-[2px] w-12 bg-black"></div>
-                <h2 class="font-title text-4xl uppercase">Productos & Editorial</h2>
+        <!-- 5. PRODUCTOS (ESTILO TÉCNICO REFINADO) -->
+        <section class="px-6 md:px-12 py-24">
+            
+            <div class="reveal flex items-end gap-4 mb-12 border-b border-black pb-4">
+                <div class="h-12 w-[2px] bg-acid"></div>
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest block mb-1">Sección 03</span>
+                    <h2 class="font-title text-4xl uppercase leading-none">Productos & Editorial</h2>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 gap-0 border-t-2 border-black">
+            <div class="grid grid-cols-1 gap-8">
                 
                 <!-- Producto 1 -->
-                <div class="reveal group grid grid-cols-1 md:grid-cols-12 border-b-2 border-black hover:bg-white transition-colors duration-300">
-                    <div class="md:col-span-2 py-8 md:border-r border-black/10 flex items-center">
-                        <span class="font-mono text-4xl font-bold text-gray-300 group-hover:text-black transition pl-4">01</span>
+                <div class="reveal group grid grid-cols-1 md:grid-cols-12 tech-card p-0 gap-0 overflow-hidden">
+                    <!-- Número -->
+                    <div class="md:col-span-1 bg-gray-50 flex items-center justify-center border-b md:border-b-0 md:border-r border-gray-200 py-4">
+                        <span class="font-mono text-2xl font-bold text-gray-300 group-hover:text-black transition">01</span>
                     </div>
-                    <div class="md:col-span-4 py-8 px-6 flex flex-col justify-center">
-                        <h3 class="font-title text-3xl uppercase mb-2">Libro Álbum</h3>
-                        <div class="flex gap-2 mb-4">
-                            <span class="text-[10px] border border-black px-1 uppercase">Editorial</span>
-                            <span class="text-[10px] border border-black px-1 uppercase">Print</span>
+                    
+                    <!-- Info -->
+                    <div class="md:col-span-5 p-8 flex flex-col justify-center bg-white relative">
+                        <!-- Líneas decorativas de fondo -->
+                        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 20px 20px;"></div>
+                        
+                        <h3 class="font-title text-3xl uppercase mb-2 relative z-10">Libro Álbum</h3>
+                        <div class="flex gap-2 mb-6 relative z-10">
+                            <span class="tech-label bg-white">Editorial</span>
+                            <span class="tech-label bg-white">Print</span>
                         </div>
-                        <p class="text-sm text-gray-600 max-w-xs">Maquetación completa y dirección de arte para edición de colección.</p>
+                        <p class="text-sm text-gray-600 max-w-xs relative z-10 leading-relaxed border-l border-black pl-4">
+                            Maquetación completa y dirección de arte para edición de colección. Acabados especiales.
+                        </p>
                     </div>
-                    <div class="md:col-span-6 relative overflow-hidden h-64 md:h-auto bg-gray-200">
-                         <img src="https://github.com/nixon97/portafolio/blob/main/maqueta%20presentacion%20librox.png?raw=true" class="absolute inset-0 w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition duration-700" alt="Libro">
-                         <div class="absolute inset-0 bg-acid/0 group-hover:bg-acid/20 transition duration-300"></div>
+
+                    <!-- Imagen -->
+                    <div class="md:col-span-6 relative overflow-hidden h-64 md:h-80 bg-gray-100 border-t md:border-t-0 md:border-l border-gray-200">
+                         <img src="https://github.com/nixon97/portafolio/blob/main/maqueta%20presentacion%20librox.png?raw=true" class="absolute inset-0 w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition duration-700 p-8" alt="Libro">
                          
-                         <!-- Botón que aparece al hover -->
-                         <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
-                             <span class="bg-black text-white px-4 py-2 font-bold uppercase text-xs">Ver Proyecto</span>
+                         <div class="absolute bottom-0 right-0 p-4">
+                             <span class="font-mono text-[10px] uppercase bg-white border border-black px-2 py-1 shadow-[2px_2px_0_#000]">Ver Proyecto ↗</span>
                          </div>
                     </div>
                 </div>
 
                 <!-- Producto 2 -->
-                <div class="reveal group grid grid-cols-1 md:grid-cols-12 border-b-2 border-black hover:bg-white transition-colors duration-300">
-                    <div class="md:col-span-2 py-8 md:border-r border-black/10 flex items-center">
-                        <span class="font-mono text-4xl font-bold text-gray-300 group-hover:text-black transition pl-4">02</span>
+                <div class="reveal group grid grid-cols-1 md:grid-cols-12 tech-card p-0 gap-0 overflow-hidden">
+                    <!-- Número -->
+                    <div class="md:col-span-1 bg-gray-50 flex items-center justify-center border-b md:border-b-0 md:border-r border-gray-200 py-4">
+                        <span class="font-mono text-2xl font-bold text-gray-300 group-hover:text-black transition">02</span>
                     </div>
-                    <div class="md:col-span-4 py-8 px-6 flex flex-col justify-center">
-                        <h3 class="font-title text-3xl uppercase mb-2">Juego de Mesa</h3>
-                        <div class="flex gap-2 mb-4">
-                            <span class="text-[10px] border border-black px-1 uppercase">Packaging</span>
-                            <span class="text-[10px] border border-black px-1 uppercase">UX</span>
+                    
+                    <!-- Info -->
+                    <div class="md:col-span-5 p-8 flex flex-col justify-center bg-white relative">
+                        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 20px 20px;"></div>
+                        
+                        <h3 class="font-title text-3xl uppercase mb-2 relative z-10">Juego de Mesa</h3>
+                        <div class="flex gap-2 mb-6 relative z-10">
+                            <span class="tech-label bg-white">Packaging</span>
+                            <span class="tech-label bg-white">UX</span>
                         </div>
-                        <p class="text-sm text-gray-600 max-w-xs">Sistema de empaque ecológico y diseño de experiencia de juego física.</p>
+                        <p class="text-sm text-gray-600 max-w-xs relative z-10 leading-relaxed border-l border-black pl-4">
+                            Sistema de empaque ecológico y diseño de experiencia de juego física (Physical UX).
+                        </p>
                     </div>
-                    <div class="md:col-span-6 relative overflow-hidden h-64 md:h-auto bg-gray-200">
-                         <img src="https://github.com/nixon97/portafolio/blob/main/bed67c2e-8006-48f9-9171-7fbda5d729a9.jpg?raw=true" class="absolute inset-0 w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition duration-700" alt="Juego">
-                         <div class="absolute inset-0 bg-acid/0 group-hover:bg-acid/20 transition duration-300"></div>
+
+                    <!-- Imagen -->
+                    <div class="md:col-span-6 relative overflow-hidden h-64 md:h-80 bg-gray-100 border-t md:border-t-0 md:border-l border-gray-200">
+                         <img src="https://github.com/nixon97/portafolio/blob/main/bed67c2e-8006-48f9-9171-7fbda5d729a9.jpg?raw=true" class="absolute inset-0 w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition duration-700 p-4" alt="Juego">
                          
-                         <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
-                             <span class="bg-black text-white px-4 py-2 font-bold uppercase text-xs">Ver Proyecto</span>
+                         <div class="absolute bottom-0 right-0 p-4">
+                             <span class="font-mono text-[10px] uppercase bg-white border border-black px-2 py-1 shadow-[2px_2px_0_#000]">Ver Proyecto ↗</span>
                          </div>
                     </div>
                 </div>
@@ -411,8 +454,8 @@
             </div>
         </section>
 
-        <!-- FOOTER (EN LIGHT MODE) -->
-        <footer class="px-6 md:px-12 pt-24 pb-12 bg-black text-white rounded-t-[2rem] mx-2 md:mx-4">
+        <!-- FOOTER -->
+        <footer class="px-6 md:px-12 py-16 bg-black text-white border-t-4 border-acid">
             <div class="reveal grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div>
                     <p class="text-[10px] uppercase tracking-widest font-bold text-acid mb-6">¿Listo para crear?</p>
@@ -423,12 +466,14 @@
                     </a>
                 </div>
                 <div class="flex flex-col justify-between items-end text-right">
-                    <div class="flex gap-6">
-                        <a href="#" class="sticker-tag bg-transparent text-white border-white hover:bg-white hover:text-black transform-none hover:transform-none">Behance</a>
-                        <a href="#" class="sticker-tag bg-transparent text-white border-white hover:bg-white hover:text-black transform-none hover:transform-none">Instagram</a>
+                    <div class="flex gap-6 font-mono text-sm">
+                        <a href="#" class="hover:text-acid hover:underline decoration-acid underline-offset-4 transition">Behance</a>
+                        <a href="#" class="hover:text-acid hover:underline decoration-acid underline-offset-4 transition">Instagram</a>
+                        <a href="#" class="hover:text-acid hover:underline decoration-acid underline-offset-4 transition">LinkedIn</a>
                     </div>
-                    <div class="mt-8 text-sm font-mono text-gray-500">
-                        © 2026 Nixon Valero<br>Diseño desde Cúcuta.
+                    <div class="mt-8 text-[10px] font-mono text-gray-500 uppercase tracking-widest">
+                        © 2026 Nixon Valero — Cúcuta, Colombia.<br>
+                        All rights reserved.
                     </div>
                 </div>
             </div>
