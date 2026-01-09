@@ -2,7 +2,8 @@
 <html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- AJUSTE CRÍTICO: Viewport fijo de 1280px para forzar vista de escritorio en móviles -->
+    <meta name="viewport" content="width=1280">
     <title>NIXON VALERO | Portafolio Visual</title>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,8 +14,8 @@
                     colors: {
                         'acid': '#ccff00', 
                         'dark': '#050505',
-                        'graphite': '#111111',
-                        'panel': 'rgba(15, 15, 15, 0.85)', /* Panel semitransparente */
+                        'light-gray': '#f0f0f0', 
+                        'off-white': '#ffffff',
                     },
                     fontFamily: {
                         sans: ['Space Grotesk', 'sans-serif'],
@@ -22,13 +23,6 @@
                     },
                     animation: {
                         'spin-slow': 'spin 12s linear infinite',
-                        'marquee': 'marquee 20s linear infinite',
-                    },
-                    keyframes: {
-                        marquee: {
-                            '0%': { transform: 'translateX(0%)' },
-                            '100%': { transform: 'translateX(-100%)' },
-                        }
                     }
                 }
             }
@@ -39,30 +33,20 @@
             background-color: #0d0d0d;
             color: #ffffff;
             overflow-x: hidden;
+            /* FORZAR ANCHO MÍNIMO para evitar deformaciones */
+            min-width: 1280px; 
         }
 
-        /* --- FONDO CONSTELACIONES (Identity V12) --- */
+        /* --- FONDO CONSTELACIONES --- */
         #canvas-container {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            background-color: #0d0d0d;
-        }
-
-        /* RUIDO SUTIL (Textura) */
-        .noise-overlay {
-            position: fixed; /* Fijo para que cubra todo */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            opacity: 0.07;
             z-index: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-color: #0d0d0d;
+            pointer-events: none;
         }
 
         /* TIPOGRAFÍA */
@@ -73,70 +57,80 @@
         }
 
         .hero-title-size {
-            font-size: clamp(5rem, 18vw, 22rem);
+            /* Tamaño fijo masivo, sin clamp adaptable */
+            font-size: 11rem; 
             line-height: 0.85;
         }
 
         .section-header {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(3rem, 10vw, 8rem);
+            font-size: 5rem;
             line-height: 0.9;
             text-transform: uppercase;
             white-space: nowrap; 
+        }
+
+        /* MARCO DE FOTO DIGITAL */
+        .digital-frame {
+            background: #fff;
+            padding: 6px 6px 30px 6px;
+            position: relative;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); 
+        }
+        .digital-frame:hover {
+            transform: translateY(-5px);
+            z-index: 10;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .digital-meta {
+            position: absolute;
+            bottom: 6px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Space Grotesk', monospace;
+            font-size: 10px;
+            color: #000;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            opacity: 0.6;
         }
 
         /* OUTLINES */
         .outline-text-black {
             color: transparent;
             -webkit-text-stroke: 1.5px #000;
-            transition: all 0.3s ease;
         }
-        .outline-text-black:hover {
-            color: #000;
-            -webkit-text-stroke: 0px;
-        }
-        
-        .outline-text-white {
+        .outline-text-gray { 
             color: transparent;
-            -webkit-text-stroke: 1px rgba(255,255,255,0.6);
-            transition: all 0.3s ease;
+            -webkit-text-stroke: 1.5px #1a1a1a;
         }
-        .section-header:hover .outline-text-white {
-            color: #ccff00;
+        .section-header:hover .outline-text-gray {
+            color: #1a1a1a;
             -webkit-text-stroke: 0px;
         }
 
-        /* DIAGRAMACIÓN TÉCNICA (GRID VISIBLE) */
-        /* Esto crea las líneas blancas finas entre elementos */
-        .tech-grid-container {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1px; /* El hueco crea la línea */
-            background-color: rgba(255, 255, 255, 0.1); /* Color de las líneas */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .tech-block {
-            background-color: rgba(15, 15, 15, 0.95); /* Fondo casi opaco para el contenido */
-            backdrop-filter: blur(4px); /* Blur sutil para ver las estrellas detrás */
-        }
-        
-        .tech-block-transparent {
-             background-color: rgba(15, 15, 15, 0.6); /* Más transparente */
-             backdrop-filter: blur(4px);
-        }
-
-        /* Estilo para etiquetas */
-        .label-box {
-            background: #ccff00;
-            color: black;
-            font-family: 'Space Grotesk', monospace;
-            font-size: 0.65rem;
+        /* ICONOS BLANCOS MINIMALISTAS */
+        .sw-badge-white {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
             font-weight: 700;
-            text-transform: uppercase;
-            padding: 2px 6px;
-            display: inline-block;
-            border: 1px solid #ccff00;
+            font-size: 12px;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            transition: all 0.3s;
+            cursor: default;
+        }
+        .sw-badge-white:hover {
+            border-color: #ccff00;
+            color: #ccff00;
+            transform: scale(1.1);
         }
 
         /* Animaciones */
@@ -153,15 +147,10 @@
 </head>
 <body class="selection:bg-acid selection:text-black">
 
-    <!-- FONDO CANVAS (IDENTIDAD V12 - VISIBLE EN TODO EL SITIO A TRAVÉS DE CAPAS) -->
-    <div id="canvas-container">
-        <canvas id="constellationCanvas"></canvas>
-        <div class="noise-overlay"></div>
-    </div>
-
-    <!-- 1. PORTADA / HERO (ACID/BLACK - INTACTA) -->
-    <header class="min-h-screen flex flex-col justify-end pb-16 md:pb-24 px-6 md:px-12 relative bg-acid text-black z-10 overflow-hidden">
-        <div class="absolute top-12 right-6 md:right-12 animate-spin-slow opacity-20 pointer-events-none">
+    <!-- 1. PORTADA / HERO (ACID) -->
+    <header class="min-h-screen flex flex-col justify-end pb-24 px-12 relative bg-acid text-black z-10 overflow-hidden">
+        
+        <div class="absolute top-12 right-12 animate-spin-slow opacity-20 pointer-events-none">
             <svg width="120" height="120" viewBox="0 0 100 100">
                 <path id="circlePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
                 <text font-family="Space Grotesk" font-size="8" fill="black">
@@ -172,234 +161,240 @@
 
         <div class="reveal active z-10 w-full">
             <p class="font-bold tracking-[0.3em] mb-2 text-xs uppercase border-b border-black/20 pb-2 inline-block">PORTAFOLIO</p>
-            <h1 class="fat-title hero-title-size text-black -ml-1 md:-ml-2">
+            <h1 class="fat-title hero-title-size text-black -ml-2">
                 DISEÑO<br>
                 <span class="outline-text-black">GRÁFICO</span>
             </h1>
-            <div class="mt-8 flex flex-col md:flex-row justify-between items-end gap-8 border-t border-black/10 pt-6">
-                <p class="font-sans font-medium text-sm md:text-base uppercase tracking-widest">Nixon Valero</p>
+            <div class="mt-8 flex flex-row justify-between items-end gap-8 border-t border-black/10 pt-6">
+                <p class="font-sans font-medium text-base uppercase tracking-widest">Nixon Valero</p>
                 <div class="text-[10px] uppercase tracking-widest opacity-60 text-right animate-bounce">SCROLL TO EXPLORE<br>↓</div>
             </div>
         </div>
     </header>
 
-    <!-- 2. PERFIL (FONDO TOTALMENTE TRANSPARENTE) -->
-    <section class="py-32 px-6 md:px-12 relative z-10">
-        <!-- El Grid Container crea las líneas de división -->
-        <div class="grid grid-cols-1 md:grid-cols-12 w-full items-center gap-0 md:gap-12">
-            <!-- Foto -->
-            <div class="md:col-span-4 pl-0 md:pl-12 pr-4 md:border-r border-white/20 reveal mb-12 md:mb-0">
-                <div class="relative w-full aspect-[3/4] group">
-                     <div class="absolute -top-2 -left-2 w-full h-full border border-acid opacity-50 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500"></div>
+    <!-- 2. PERFIL (OSCURO CON ESTRELLAS - ESTRUCTURA FIJA) -->
+    <section class="relative py-32 px-12 border-b border-white/10 overflow-hidden">
+        
+        <!-- CANVAS SOLO AQUÍ -->
+        <div class="absolute inset-0 z-0">
+            <canvas id="constellationCanvas"></canvas>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80"></div>
+        </div>
+
+        <!-- GRID 12 FIJO (Sin adaptabilidad móvil) -->
+        <div class="relative z-10 grid grid-cols-12 gap-12 items-center">
+            
+            <!-- Foto (Siempre 4 columnas) -->
+            <div class="col-span-4 pl-12 pr-4 reveal">
+                <div class="relative aspect-[3/4] border border-white/20 p-2">
                     <img src="https://github.com/nixon97/portafolio/blob/main/Gemini_Generated_Image_t190lnt190lnt190.png?raw=true" 
-                         alt="Perfil" class="w-full h-full object-cover grayscale rounded-sm relative z-10 border border-white/20">
+                         alt="Perfil" class="w-full h-full object-cover grayscale">
                 </div>
             </div>
-            <!-- Texto -->
-            <div class="md:col-span-8 px-0 md:px-8 flex flex-col justify-center reveal">
-                <div class="font-sans font-light text-sm md:text-xl leading-relaxed tracking-wide text-gray-300 space-y-6 max-w-2xl">
-                    <p><span class="text-acid font-bold font-title text-xl uppercase tracking-wider block mb-4">Sobre mí</span>
-                    Experto en comunicación visual con énfasis en identidad corporativa y diagramación editorial. Mi enfoque se basa en la depuración visual.</p>
+
+            <!-- Info (Siempre 8 columnas) -->
+            <div class="col-span-8 reveal">
+                <h2 class="text-acid font-bold font-title text-3xl uppercase tracking-wider mb-6">Sobre mí</h2>
+                <div class="font-sans font-light text-xl leading-relaxed tracking-wide text-gray-300 space-y-6 max-w-2xl border-l-2 border-acid pl-6">
+                    <p>Experto en comunicación visual con énfasis en identidad corporativa y diagramación editorial. Mi enfoque se basa en la depuración visual.</p>
                     <p>Desde Cúcuta, Colombia, desarrollo sistemas gráficos que fusionan la estética contemporánea con la funcionalidad estratégica.</p>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- 3. INFOGRAFÍA (DIAGRAMACIÓN COMPACTA) -->
-    <section class="relative py-20 overflow-hidden">
-        <!-- Fondo oscuro semitransparente para que se vean las estrellas sutilmente -->
-        <div class="absolute inset-0 bg-dark/90 z-0"></div>
-
-        <!-- Título -->
-        <div class="px-6 md:px-12 mb-8 relative z-10 text-center md:text-left flex flex-col md:flex-row items-end justify-between">
-            <h2 class="fat-title section-header leading-none text-white">
-                INFO<span class="outline-text-white">GRAFÍA</span>
-            </h2>
-            <div class="hidden md:block font-mono text-[10px] text-acid uppercase tracking-widest mb-4">
-                /// Visual Data Systems ///
-            </div>
-        </div>
-
-        <!-- Estructura Compacta (Sin Espacios) -->
-        <div class="px-6 md:px-12 relative z-10">
-            <!-- Grid Container con gap-1px para crear líneas -->
-            <div class="tech-grid-container">
-                
-                <!-- Columna Lateral (Datos) -->
-                <div class="hidden md:flex col-span-2 tech-block p-4 flex-col justify-between">
-                    <div class="font-mono text-[10px] uppercase text-gray-500 rotate-180" style="writing-mode: vertical-rl;">
-                        System Analysis /// 2026
-                    </div>
-                    <div class="text-acid font-bold font-mono text-xl">01</div>
-                </div>
-
-                <!-- Zona Visual -->
-                <div class="col-span-12 md:col-span-10 grid grid-cols-12 gap-px bg-white/10"> <!-- Subgrid -->
-                    
-                    <!-- Imagen Principal (Ocupa todo el ancho superior) -->
-                    <div class="col-span-12 tech-block p-4 md:p-6 group">
-                        <div class="relative w-full border border-white/10 overflow-hidden">
-                            <img src="https://github.com/nixon97/portafolio/blob/main/3.png?raw=true" class="w-full h-auto object-cover opacity-90 group-hover:opacity-100 group-hover:scale-101 transition duration-700" alt="Data Main">
-                            <!-- Etiqueta técnica superpuesta -->
-                            <div class="absolute bottom-4 left-4">
-                                <span class="label-box">MARKET OVERVIEW</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Imágenes Secundarias (Pegadas abajo) -->
-                    <div class="col-span-6 tech-block p-4 md:p-6 group hover:bg-white/5 transition">
-                        <div class="relative w-full aspect-square border border-white/10 overflow-hidden">
-                            <img src="https://github.com/nixon97/portafolio/blob/main/1.png?raw=true" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500" alt="Data 2">
-                            <div class="absolute top-2 right-2">
-                                <span class="font-mono text-[10px] text-white bg-black/50 px-1">FIG 1.1</span>
-                            </div>
-                        </div>
-                        <h4 class="font-title text-sm uppercase mt-3 text-gray-300">Reporte Social</h4>
-                    </div>
-                    
-                    <div class="col-span-6 tech-block p-4 md:p-6 group hover:bg-white/5 transition">
-                        <div class="relative w-full aspect-square border border-white/10 overflow-hidden">
-                            <img src="https://github.com/nixon97/portafolio/blob/main/2.png?raw=true" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500" alt="Data 3">
-                            <div class="absolute top-2 right-2">
-                                <span class="font-mono text-[10px] text-white bg-black/50 px-1">FIG 1.2</span>
-                            </div>
-                        </div>
-                        <h4 class="font-title text-sm uppercase mt-3 text-gray-300">Procesos</h4>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. ILUSTRACIÓN (GRID ASIMÉTRICO / PLANO) -->
-    <section class="relative py-20 overflow-hidden">
-         <div class="absolute inset-0 bg-dark/90 z-0"></div>
-
-        <div class="px-6 md:px-12 mb-8 relative z-10 text-center md:text-left flex flex-col md:flex-row items-end justify-between">
-            <h2 class="fat-title section-header leading-none text-white">
-                ILUS<span class="outline-text-white">TRACIÓN</span>
-            </h2>
-             <div class="hidden md:block font-mono text-[10px] text-acid uppercase tracking-widest mb-4">
-                /// Selected Artworks ///
-            </div>
-        </div>
-
-        <div class="px-6 md:px-12 relative z-10">
-            <!-- Grid Container -->
-            <div class="tech-grid-container">
-                
-                <!-- Imagen Grande (Izquierda) -->
-                <div class="col-span-12 md:col-span-6 tech-block p-0 relative group">
-                    <div class="w-full h-full relative aspect-[3/4] md:aspect-auto overflow-hidden">
-                        <img src="https://github.com/nixon97/portafolio/blob/main/ed25b15b-9c2e-4a6a-aada-329b67d161cc.jpg?raw=true" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-700" alt="Cyber Punk">
-                        
-                        <!-- Overlay Info al Hover -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
-                        <div class="absolute bottom-6 left-6">
-                            <span class="label-box mb-2">CONCEPT ART</span>
-                            <h3 class="font-title text-3xl uppercase text-white">Cyber Punk</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Columna Derecha (Grid interno) -->
-                <div class="col-span-12 md:col-span-6 grid grid-rows-2 gap-px bg-white/10">
-                    
-                    <!-- Imagen 2 -->
-                    <div class="tech-block p-4 md:p-6 flex gap-4 items-center group relative overflow-hidden">
-                         <!-- Fondo decorativo al hover -->
-                         <div class="absolute inset-0 bg-acid/5 opacity-0 group-hover:opacity-100 transition duration-300"></div>
-                         
-                         <div class="w-1/3 h-24 md:h-32 border border-white/10 relative overflow-hidden">
-                             <img src="https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Neon City">
-                         </div>
-                         <div class="w-2/3 flex flex-col justify-center">
-                             <h3 class="font-title text-xl uppercase mb-1 text-white">Neon City</h3>
-                             <p class="font-sans text-[10px] text-gray-400">Exploración urbana nocturna. Paleta de color saturada.</p>
-                             <div class="w-full h-[1px] bg-white/20 mt-3"></div>
-                         </div>
-                    </div>
-
-                    <!-- Imagen 3 -->
-                    <div class="tech-block p-4 md:p-6 flex gap-4 items-center group relative overflow-hidden">
-                        <div class="absolute inset-0 bg-acid/5 opacity-0 group-hover:opacity-100 transition duration-300"></div>
-
-                        <div class="w-2/3 flex flex-col justify-center text-right">
-                            <h3 class="font-title text-xl uppercase mb-1 text-white">Surrealism</h3>
-                            <p class="font-sans text-[10px] text-gray-400">Composición mixta digital.</p>
-                            <div class="w-full h-[1px] bg-white/20 mt-3"></div>
-                        </div>
-                        <div class="w-1/3 h-24 md:h-32 border border-white/10 relative overflow-hidden">
-                            <img src="https://github.com/nixon97/portafolio/blob/main/32d84d57-6005-4d27-82fe-dac18af42c62.jpg?raw=true" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Surreal">
-                        </div>
-                   </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. PRODUCTOS (SOLIDEZ HORIZONTAL) -->
-    <section class="relative py-20 overflow-hidden">
-         <div class="absolute inset-0 bg-dark/95 z-0"></div>
-
-        <div class="px-6 md:px-12 mb-8 relative z-10 text-center md:text-left">
-             <h2 class="fat-title section-header leading-none text-white">
-                PRO<span class="outline-text-white">DUCTOS</span>
-            </h2>
-        </div>
-
-        <div class="px-6 md:px-12 relative z-10">
-            <div class="tech-grid-container">
-                <!-- Producto 1 -->
-                <div class="col-span-12 grid grid-cols-1 md:grid-cols-12 tech-block group">
-                    <div class="md:col-span-5 p-8 flex flex-col justify-center relative border-r border-white/10">
-                        <div class="absolute top-4 left-4 text-acid font-mono text-xs font-bold">01</div>
-                        <h3 class="font-title text-3xl md:text-4xl mt-4 mb-2 text-white">Libro Álbum</h3>
-                        <div class="flex gap-2 mb-4">
-                            <span class="label-box bg-transparent border-white/30 text-gray-400">Editorial</span>
-                        </div>
-                        <p class="font-sans text-xs text-gray-400 max-w-sm leading-relaxed">
-                            Diseño editorial de colección. Maquetación experimental con énfasis en la tipografía como imagen.
-                        </p>
-                    </div>
-                    <div class="md:col-span-7 h-64 md:h-80 bg-graphite relative overflow-hidden">
-                        <img src="https://github.com/nixon97/portafolio/blob/main/maqueta%20presentacion%20librox.png?raw=true" class="w-full h-full object-cover mix-blend-normal opacity-90 group-hover:scale-105 transition duration-700" alt="Libro">
-                    </div>
-                </div>
-
-                <!-- Producto 2 -->
-                <div class="col-span-12 grid grid-cols-1 md:grid-cols-12 tech-block group">
-                    <div class="md:col-span-7 h-64 md:h-80 bg-graphite relative overflow-hidden order-2 md:order-1 border-r border-white/10">
-                        <img src="https://github.com/nixon97/portafolio/blob/main/bed67c2e-8006-48f9-9171-7fbda5d729a9.jpg?raw=true" class="w-full h-full object-cover mix-blend-normal opacity-90 group-hover:scale-105 transition duration-700" alt="Juego">
-                    </div>
-                    <div class="md:col-span-5 p-8 flex flex-col justify-center relative order-1 md:order-2">
-                         <div class="absolute top-4 right-4 text-acid font-mono text-xs font-bold">02</div>
-                        <h3 class="font-title text-3xl md:text-4xl mt-4 mb-2 text-white">Board Game</h3>
-                        <div class="flex gap-2 mb-4">
-                            <span class="label-box bg-transparent border-white/30 text-gray-400">Packaging</span>
-                        </div>
-                        <p class="font-sans text-xs text-gray-400 max-w-sm leading-relaxed">
-                            Sistema de empaque y tablero. Experiencia de usuario física.
-                        </p>
+                <!-- SOFTWARE ICONS -->
+                <div class="mt-12">
+                    <p class="text-[10px] uppercase tracking-widest text-gray-500 mb-4">Toolkit</p>
+                    <div class="flex flex-wrap gap-3 font-mono">
+                        <div class="sw-badge-white" title="Photoshop">Ps</div>
+                        <div class="sw-badge-white" title="Illustrator">Ai</div>
+                        <div class="sw-badge-white" title="InDesign">Id</div>
+                        <div class="sw-badge-white" title="After Effects">Ae</div>
+                        <div class="sw-badge-white" title="Procreate">Pro</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-black text-white py-24 border-t-4 border-acid relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full py-4 border-b border-white/10 overflow-hidden bg-acid text-black">
-            <div class="animate-marquee whitespace-nowrap font-mono text-sm font-bold uppercase tracking-widest">
-                Open for work /// Available for freelance /// Let's create something iconic /// Open for work /// Available for freelance ///
+    <!-- 3. INFOGRAFÍA (FONDO CLARO - GRID FIJO) -->
+    <section class="py-24 px-12 bg-light-gray relative border-b border-black/5 text-black">
+        
+        <!-- Header -->
+        <div class="reveal mb-16 flex items-end justify-between border-b border-black/10 pb-6">
+            <div>
+                <span class="text-gray-500 font-mono text-xs mb-2 block">01 /// DATA VIZ</span>
+                <h2 class="section-header text-black leading-none">
+                    INFO<span class="outline-text-gray">GRAFÍA</span>
+                </h2>
             </div>
         </div>
 
-        <div class="px-6 md:px-12 mt-12 grid grid-cols-2 gap-12">
+        <!-- Grid Diagramado Fijo (12 Columnas) -->
+        <div class="grid grid-cols-12 gap-6 reveal">
+            
+            <!-- Imagen Principal (Siempre 8 columnas) -->
+            <div class="col-span-8 group">
+                <div class="digital-frame">
+                    <img src="https://github.com/nixon97/portafolio/blob/main/3.png?raw=true" class="w-full h-auto object-cover" alt="Infografía Principal">
+                    <div class="digital-meta">
+                        <span>MARKET_OVERVIEW.Ai</span>
+                        <span>VECTOR • CMYK</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Imágenes Secundarias (Siempre 4 columnas, apiladas) -->
+            <div class="col-span-4 flex flex-col gap-6">
+                <div class="digital-frame h-full">
+                    <img src="https://github.com/nixon97/portafolio/blob/main/1.png?raw=true" class="w-full h-full object-cover" alt="Data 1">
+                    <div class="digital-meta">
+                        <span>FIG_1.1</span>
+                        <span>SOCIAL</span>
+                    </div>
+                </div>
+                <div class="digital-frame h-full">
+                    <img src="https://github.com/nixon97/portafolio/blob/main/2.png?raw=true" class="w-full h-full object-cover" alt="Data 2">
+                    <div class="digital-meta">
+                        <span>FIG_1.2</span>
+                        <span>PROCESS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. ILUSTRACIÓN (FONDO CLARO - GRID DE 3 COLUMNAS FIJO) -->
+    <section class="py-24 px-12 bg-light-gray relative border-b border-black/5 text-black">
+        
+        <div class="reveal mb-16 flex items-end justify-between border-b border-black/10 pb-6">
+            <div>
+                <span class="text-gray-500 font-mono text-xs mb-2 block">02 /// ARTWORK</span>
+                <h2 class="section-header text-black leading-none">
+                    ILUS<span class="outline-text-gray">TRACIÓN</span>
+                </h2>
+            </div>
+        </div>
+
+        <!-- Grid 3 Columnas Fijo (No se apila) -->
+        <div class="grid grid-cols-3 gap-8 reveal">
+            
+            <!-- Item 1 -->
+            <div class="flex flex-col gap-4">
+                <div class="digital-frame">
+                    <div class="aspect-[4/5] overflow-hidden bg-gray-100">
+                        <img src="https://github.com/nixon97/portafolio/blob/main/ed25b15b-9c2e-4a6a-aada-329b67d161cc.jpg?raw=true" class="w-full h-full object-cover transition duration-500 hover:scale-105" alt="Cyber Punk">
+                    </div>
+                    <div class="digital-meta">
+                        <span>CYBER_PUNK.PSD</span>
+                        <span>DIGITAL</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-title text-black text-lg uppercase">Character Design</h3>
+                    <p class="font-sans text-xs text-gray-500">Diseño de personaje conceptual.</p>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="flex flex-col gap-4">
+                <div class="digital-frame">
+                    <div class="aspect-[4/5] overflow-hidden bg-gray-100">
+                        <img src="https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true" class="w-full h-full object-cover transition duration-500 hover:scale-105" alt="Neon City">
+                    </div>
+                    <div class="digital-meta">
+                        <span>NEON_CITY.JPG</span>
+                        <span>ENV</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-title text-black text-lg uppercase">Neon City</h3>
+                    <p class="font-sans text-xs text-gray-500">Entorno urbano nocturno.</p>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="flex flex-col gap-4">
+                <div class="digital-frame">
+                    <div class="aspect-[4/5] overflow-hidden bg-gray-100">
+                        <img src="https://github.com/nixon97/portafolio/blob/main/32d84d57-6005-4d27-82fe-dac18af42c62.jpg?raw=true" class="w-full h-full object-cover transition duration-500 hover:scale-105" alt="Surreal">
+                    </div>
+                    <div class="digital-meta">
+                        <span>SURREAL.RAW</span>
+                        <span>MIXED</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-title text-black text-lg uppercase">Surrealism</h3>
+                    <p class="font-sans text-xs text-gray-500">Composición mixta.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. PRODUCTOS (FONDO CLARO - GRID FIJO) -->
+    <section class="py-24 px-12 bg-light-gray relative text-black">
+        
+        <div class="reveal mb-16 flex items-end justify-between border-b border-black/10 pb-6">
+            <div>
+                <span class="text-gray-500 font-mono text-xs mb-2 block">03 /// PACKAGING & EDITORIAL</span>
+                <h2 class="section-header text-black leading-none">
+                    PRO<span class="outline-text-gray">DUCTOS</span>
+                </h2>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-12 reveal">
+            
+            <!-- Producto 1 (Grid 12 Columnas Fijo) -->
+            <div class="grid grid-cols-12 border border-black/10 bg-white">
+                <!-- Texto (3 col) -->
+                <div class="col-span-4 p-8 flex flex-col justify-center border-r border-black/10">
+                    <span class="text-acid font-bold font-mono text-xs mb-4 px-2 bg-black w-fit">01</span>
+                    <h3 class="font-title text-3xl text-black mb-4">Libro Álbum</h3>
+                    <p class="font-sans text-sm text-gray-600 mb-6 leading-relaxed">
+                        Diseño editorial de colección. Maquetación experimental con énfasis en la tipografía como imagen.
+                    </p>
+                    <div class="flex gap-2">
+                        <span class="border border-black/20 px-2 py-1 text-[10px] text-gray-500 uppercase">Editorial</span>
+                        <span class="border border-black/20 px-2 py-1 text-[10px] text-gray-500 uppercase">Print</span>
+                    </div>
+                </div>
+                <!-- Imagen (9 col) -->
+                <div class="col-span-8 bg-[#f8f8f8] h-[400px] relative flex items-center justify-center p-8 group overflow-hidden">
+                    <img src="https://github.com/nixon97/portafolio/blob/main/maqueta%20presentacion%20librox.png?raw=true" 
+                         class="w-full h-full object-contain transition duration-700 group-hover:scale-105" 
+                         alt="Libro">
+                </div>
+            </div>
+
+            <!-- Producto 2 (Grid 12 Columnas Fijo) -->
+            <div class="grid grid-cols-12 border border-black/10 bg-white">
+                <!-- Imagen (9 col) -->
+                <div class="col-span-8 bg-[#f8f8f8] h-[400px] relative flex items-center justify-center p-8 group overflow-hidden border-r border-black/10">
+                    <img src="https://github.com/nixon97/portafolio/blob/main/bed67c2e-8006-48f9-9171-7fbda5d729a9.jpg?raw=true" 
+                         class="w-full h-full object-contain transition duration-700 group-hover:scale-105" 
+                         alt="Juego">
+                </div>
+                <!-- Texto (3 col) -->
+                <div class="col-span-4 p-8 flex flex-col justify-center">
+                    <span class="text-acid font-bold font-mono text-xs mb-4 px-2 bg-black w-fit">02</span>
+                    <h3 class="font-title text-3xl text-black mb-4">Board Game</h3>
+                    <p class="font-sans text-sm text-gray-600 mb-6 leading-relaxed">
+                        Sistema de empaque y tablero. Experiencia de usuario física (Tactile UX) y diseño de componentes.
+                    </p>
+                    <div class="flex gap-2">
+                        <span class="border border-black/20 px-2 py-1 text-[10px] text-gray-500 uppercase">Packaging</span>
+                        <span class="border border-black/20 px-2 py-1 text-[10px] text-gray-500 uppercase">UX</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER (NEGRO PARA CERRAR) -->
+    <footer class="bg-black text-white py-24 border-t-4 border-acid">
+        <div class="px-12 grid grid-cols-2 gap-12">
             <div>
                 <p class="font-mono text-xs text-gray-500 mb-4">CONTACTO</p>
                 <a href="mailto:nixonvaldo.valero@gmail.com" class="font-title text-4xl md:text-6xl hover:text-acid transition duration-300">
@@ -407,9 +402,10 @@
                 </a>
             </div>
             <div class="flex flex-col justify-end items-end">
-                <div class="flex gap-6 mb-8 font-mono text-xs md:text-sm">
+                <div class="flex gap-6 mb-8 font-mono text-sm">
                     <a href="#" class="hover:text-acid hover:underline">BEHANCE</a>
                     <a href="#" class="hover:text-acid hover:underline">INSTAGRAM</a>
+                    <a href="#" class="hover:text-acid hover:underline">LINKEDIN</a>
                 </div>
                 <div class="text-[10px] uppercase tracking-widest text-gray-600 text-right">
                     © 2026 Nixon Valero <br> Cúcuta, Colombia
@@ -418,24 +414,29 @@
         </div>
     </footer>
 
-    <!-- SCRIPT ORIGINAL (V12 Logic) -->
+    <!-- SCRIPT V12 (Estrellas) -->
     <script>
         const canvas = document.getElementById('constellationCanvas');
+        const container = document.getElementById('canvas-container');
         const ctx = canvas.getContext('2d');
+        
+        let width, height;
+
         const CONFIG = {
-            distantStarCount: 1800, 
-            neonStarCount: 42,      
+            distantStarCount: 1200, 
+            neonStarCount: 30,      
             neonColor: '#dfff00',
             minSegmentLength: 40,        
             maxSegmentLength: 200, 
             gridCols: 12, 
             gridRows: 8
         };
-        let width, height;
+
         let distantStars = [];
         let allPoints = []; 
         let neonStars = [];
         let connections = []; 
+
         class DistantStar {
             constructor() {
                 this.x = Math.random() * width;
@@ -493,82 +494,54 @@
                 ctx.restore();
             }
         }
+
         function init() {
             width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
+            height = canvas.height = document.querySelector('section:nth-of-type(1)').offsetHeight + window.innerHeight; 
             generate();
             drawScene();
         }
+
         function generate() {
             distantStars = [];
             allPoints = [];
             neonStars = [];
             connections = [];
-            for (let i = 0; i < CONFIG.distantStarCount; i++) {
-                distantStars.push(new DistantStar());
-            }
+            for (let i = 0; i < CONFIG.distantStarCount; i++) distantStars.push(new DistantStar());
+            
             const colSize = width / CONFIG.gridCols;
             const rowSize = height / CONFIG.gridRows;
             for (let r = 0; r < CONFIG.gridRows; r++) {
                 for (let c = 0; c < CONFIG.gridCols; c++) {
                     const starsInCell = Math.random() > 0.3 ? 2 : 1;
                     for(let k=0; k<starsInCell; k++) {
-                        const posX = (c * colSize) + (Math.random() * colSize);
-                        const posY = (r * rowSize) + (Math.random() * rowSize);
-                        allPoints.push(new WhiteStar(posX, posY));
+                        allPoints.push(new WhiteStar((c * colSize) + (Math.random() * colSize), (r * rowSize) + (Math.random() * rowSize)));
                     }
                 }
             }
-            const starCount = window.innerWidth < 800 ? CONFIG.neonStarCount * 0.6 : CONFIG.neonStarCount;
-            for (let i = 0; i < starCount; i++) {
-                neonStars.push(new NeonStar());
-            }
+            for (let i = 0; i < CONFIG.neonStarCount; i++) neonStars.push(new NeonStar());
+            
             let shuffledPoints = [...allPoints].sort(() => Math.random() - 0.5);
             for (let i = 0; i < shuffledPoints.length; i++) {
-                let startPoint = shuffledPoints[i];
-                if (startPoint.isUsed) continue;
-                const shapeWeight = Math.random() * 1.5 + 0.5;
-                let candidates = [];
+                let p1 = shuffledPoints[i];
+                if (p1.isUsed) continue;
                 for (let j = 0; j < allPoints.length; j++) {
-                    const p = allPoints[j];
-                    if (p === startPoint || p.isUsed) continue; 
-                    const dist = Math.hypot(p.x - startPoint.x, p.y - startPoint.y);
+                    let p2 = allPoints[j];
+                    if (p1 === p2 || p2.isUsed) continue;
+                    let dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
                     if (dist < CONFIG.maxSegmentLength && dist > CONFIG.minSegmentLength) {
-                        candidates.push({ point: p, dist: dist });
-                    }
-                }
-                if (candidates.length === 0) continue;
-                candidates.sort((a, b) => a.dist - b.dist);
-                const nextPointIdx = Math.floor(Math.random() * Math.min(3, candidates.length));
-                const nextPoint = candidates[nextPointIdx].point;
-                connections.push({ start: startPoint, end: nextPoint, weight: shapeWeight });
-                startPoint.isUsed = true;
-                nextPoint.isUsed = true;
-                if (Math.random() > 0.5) {
-                    const fromStart = Math.random() > 0.5; 
-                    const pivotPoint = fromStart ? startPoint : nextPoint;
-                    let thirdCandidates = [];
-                    for (let k = 0; k < allPoints.length; k++) {
-                        const p = allPoints[k];
-                        if (p.isUsed) continue; 
-                        const dist = Math.hypot(p.x - pivotPoint.x, p.y - pivotPoint.y);
-                        if (dist < CONFIG.maxSegmentLength && dist > CONFIG.minSegmentLength) {
-                            thirdCandidates.push({ point: p, dist: dist });
-                        }
-                    }
-                    if (thirdCandidates.length > 0) {
-                        thirdCandidates.sort((a, b) => a.dist - b.dist);
-                        const thirdPoint = thirdCandidates[0].point; 
-                        connections.push({ start: pivotPoint, end: thirdPoint, weight: shapeWeight });
-                        thirdPoint.isUsed = true;
+                        connections.push({ start: p1, end: p2, weight: Math.random() + 0.5 });
+                        p1.isUsed = true; p2.isUsed = true;
+                        break; 
                     }
                 }
             }
         }
+
         function drawScene() {
             ctx.clearRect(0, 0, width, height);
             distantStars.forEach(ds => ds.draw());
-            ctx.strokeStyle = 'rgba(230, 230, 230, 0.35)'; 
+            ctx.strokeStyle = 'rgba(230, 230, 230, 0.25)'; 
             ctx.setLineDash([4, 8]); 
             connections.forEach(conn => {
                 ctx.lineWidth = conn.weight; 
@@ -581,12 +554,14 @@
             allPoints.forEach(p => p.draw());
             neonStars.forEach(s => s.draw());
         }
+
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(init, 200);
         });
         init();
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
