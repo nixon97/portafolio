@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NIXON VALERO | Portafolio Visual</title>
-    <!-- Fonts: Syne & Space Grotesk -->
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -14,8 +13,8 @@
                     colors: {
                         'acid': '#ccff00', 
                         'dark': '#050505',
-                        'paper': '#f8f8f8', 
-                        'ink': '#111111', 
+                        'graphite': '#111111',
+                        'panel': 'rgba(15, 15, 15, 0.85)', /* Panel semitransparente */
                     },
                     fontFamily: {
                         sans: ['Space Grotesk', 'sans-serif'],
@@ -23,6 +22,13 @@
                     },
                     animation: {
                         'spin-slow': 'spin 12s linear infinite',
+                        'marquee': 'marquee 20s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
                     }
                 }
             }
@@ -35,7 +41,7 @@
             overflow-x: hidden;
         }
 
-        /* --- FONDO CONSTELACIONES (SOLO VISIBLE ARRIBA) --- */
+        /* --- FONDO CONSTELACIONES (Identity V12) --- */
         #canvas-container {
             position: fixed;
             top: 0;
@@ -46,15 +52,16 @@
             background-color: #0d0d0d;
         }
 
+        /* RUIDO SUTIL (Textura) */
         .noise-overlay {
-            position: absolute;
+            position: fixed; /* Fijo para que cubra todo */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            opacity: 0.12; 
-            z-index: 2;
+            opacity: 0.07;
+            z-index: 0;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
@@ -72,96 +79,87 @@
 
         .section-header {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(3rem, 10vw, 8rem);
             line-height: 0.9;
             text-transform: uppercase;
-            color: #111; 
+            white-space: nowrap; 
         }
 
         /* OUTLINES */
-        .outline-text-light {
+        .outline-text-black {
             color: transparent;
-            -webkit-text-stroke: 1.5px #111;
+            -webkit-text-stroke: 1.5px #000;
             transition: all 0.3s ease;
         }
-        .outline-text-light:hover {
-            color: #111;
+        .outline-text-black:hover {
+            color: #000;
             -webkit-text-stroke: 0px;
         }
         
-        .outline-text-dark {
+        .outline-text-white {
             color: transparent;
-            -webkit-text-stroke: 2px #000;
-        }
-
-        /* ESTILO BLUEPRINT / LÍNEAS TÉCNICAS */
-        .tech-border-b {
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-        .tech-border-t {
-            border-top: 1px solid rgba(0,0,0,0.1);
-        }
-        .tech-border-r {
-            border-right: 1px solid rgba(0,0,0,0.1);
-        }
-
-        /* TARJETA TÉCNICA (FRAME) */
-        .tech-card {
-            background: white;
-            padding: 8px; /* Marco blanco */
-            border: 1px solid #e5e5e5;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            -webkit-text-stroke: 1px rgba(255,255,255,0.6);
             transition: all 0.3s ease;
         }
-        .tech-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            border-color: #000;
+        .section-header:hover .outline-text-white {
+            color: #ccff00;
+            -webkit-text-stroke: 0px;
         }
 
-        /* TAGS TÉCNICOS */
-        .tech-label {
+        /* DIAGRAMACIÓN TÉCNICA (GRID VISIBLE) */
+        /* Esto crea las líneas blancas finas entre elementos */
+        .tech-grid-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1px; /* El hueco crea la línea */
+            background-color: rgba(255, 255, 255, 0.1); /* Color de las líneas */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .tech-block {
+            background-color: rgba(15, 15, 15, 0.95); /* Fondo casi opaco para el contenido */
+            backdrop-filter: blur(4px); /* Blur sutil para ver las estrellas detrás */
+        }
+        
+        .tech-block-transparent {
+             background-color: rgba(15, 15, 15, 0.6); /* Más transparente */
+             backdrop-filter: blur(4px);
+        }
+
+        /* Estilo para etiquetas */
+        .label-box {
+            background: #ccff00;
+            color: black;
             font-family: 'Space Grotesk', monospace;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #666;
-            border: 1px solid #eee;
             padding: 2px 6px;
+            display: inline-block;
+            border: 1px solid #ccff00;
         }
 
         /* Animaciones */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(30px);
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-
-        .image-zoom-container {
-            overflow: hidden;
-            background: #f0f0f0;
-        }
-        .image-zoom-container img {
-            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .tech-card:hover .image-zoom-container img {
-            transform: scale(1.03);
-        }
     </style>
 </head>
-<body class="selection:bg-black selection:text-acid">
+<body class="selection:bg-acid selection:text-black">
 
-    <!-- FONDO CANVAS (SOLO VISIBLE EN HERO Y PERFIL) -->
+    <!-- FONDO CANVAS (IDENTIDAD V12 - VISIBLE EN TODO EL SITIO A TRAVÉS DE CAPAS) -->
     <div id="canvas-container">
         <canvas id="constellationCanvas"></canvas>
         <div class="noise-overlay"></div>
     </div>
 
-    <!-- 1. PORTADA / HERO -->
+    <!-- 1. PORTADA / HERO (ACID/BLACK - INTACTA) -->
     <header class="min-h-screen flex flex-col justify-end pb-16 md:pb-24 px-6 md:px-12 relative bg-acid text-black z-10 overflow-hidden">
         <div class="absolute top-12 right-6 md:right-12 animate-spin-slow opacity-20 pointer-events-none">
             <svg width="120" height="120" viewBox="0 0 100 100">
@@ -171,11 +169,12 @@
                 </text>
             </svg>
         </div>
+
         <div class="reveal active z-10 w-full">
             <p class="font-bold tracking-[0.3em] mb-2 text-xs uppercase border-b border-black/20 pb-2 inline-block">PORTAFOLIO</p>
             <h1 class="fat-title hero-title-size text-black -ml-1 md:-ml-2">
                 DISEÑO<br>
-                <span class="outline-text-dark">GRÁFICO</span>
+                <span class="outline-text-black">GRÁFICO</span>
             </h1>
             <div class="mt-8 flex flex-col md:flex-row justify-between items-end gap-8 border-t border-black/10 pt-6">
                 <p class="font-sans font-medium text-sm md:text-base uppercase tracking-widest">Nixon Valero</p>
@@ -184,17 +183,20 @@
         </div>
     </header>
 
-    <!-- 2. PERFIL -->
+    <!-- 2. PERFIL (FONDO TOTALMENTE TRANSPARENTE) -->
     <section class="py-32 px-6 md:px-12 relative z-10">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-            <div class="md:col-span-4 reveal">
-                <div class="relative group">
-                    <div class="absolute inset-0 border border-acid translate-x-3 translate-y-3 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <!-- El Grid Container crea las líneas de división -->
+        <div class="grid grid-cols-1 md:grid-cols-12 w-full items-center gap-0 md:gap-12">
+            <!-- Foto -->
+            <div class="md:col-span-4 pl-0 md:pl-12 pr-4 md:border-r border-white/20 reveal mb-12 md:mb-0">
+                <div class="relative w-full aspect-[3/4] group">
+                     <div class="absolute -top-2 -left-2 w-full h-full border border-acid opacity-50 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500"></div>
                     <img src="https://github.com/nixon97/portafolio/blob/main/Gemini_Generated_Image_t190lnt190lnt190.png?raw=true" 
-                         alt="Perfil" class="w-full grayscale group-hover:grayscale-0 transition duration-700 rounded-sm relative z-10 border border-white/20">
+                         alt="Perfil" class="w-full h-full object-cover grayscale rounded-sm relative z-10 border border-white/20">
                 </div>
             </div>
-            <div class="md:col-span-8 reveal">
+            <!-- Texto -->
+            <div class="md:col-span-8 px-0 md:px-8 flex flex-col justify-center reveal">
                 <div class="font-sans font-light text-sm md:text-xl leading-relaxed tracking-wide text-gray-300 space-y-6 max-w-2xl">
                     <p><span class="text-acid font-bold font-title text-xl uppercase tracking-wider block mb-4">Sobre mí</span>
                     Experto en comunicación visual con énfasis en identidad corporativa y diagramación editorial. Mi enfoque se basa en la depuración visual.</p>
@@ -204,284 +206,219 @@
         </div>
     </section>
 
-    <!-- ================================================================================== -->
-    <!--  ZONA DE TRABAJO (LIGHT MODE / BLUEPRINT) -->
-    <!-- ================================================================================== -->
-    
-    <!-- TRANSICIÓN RECTA TÉCNICA -->
-    <main class="relative z-20 bg-paper text-ink border-t border-white/20">
-        
-        <!-- BARRA DE SEPARACIÓN TÉCNICA -->
-        <div class="w-full bg-black text-white py-2 px-6 md:px-12 flex justify-between items-center text-[10px] font-mono tracking-widest uppercase">
-            <span>/// WORKSPACE_INIT ///</span>
-            <span>COORD: 07.8939° N, 72.5078° W</span>
+    <!-- 3. INFOGRAFÍA (DIAGRAMACIÓN COMPACTA) -->
+    <section class="relative py-20 overflow-hidden">
+        <!-- Fondo oscuro semitransparente para que se vean las estrellas sutilmente -->
+        <div class="absolute inset-0 bg-dark/90 z-0"></div>
+
+        <!-- Título -->
+        <div class="px-6 md:px-12 mb-8 relative z-10 text-center md:text-left flex flex-col md:flex-row items-end justify-between">
+            <h2 class="fat-title section-header leading-none text-white">
+                INFO<span class="outline-text-white">GRAFÍA</span>
+            </h2>
+            <div class="hidden md:block font-mono text-[10px] text-acid uppercase tracking-widest mb-4">
+                /// Visual Data Systems ///
+            </div>
         </div>
 
-        <!-- 3. INFOGRAFÍA -->
-        <section class="px-6 md:px-12 py-24 border-b border-gray-300">
-            <!-- Header Técnico -->
-            <div class="reveal border-b border-black pb-8 mb-12 flex flex-col md:flex-row justify-between md:items-end">
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-3 h-3 bg-acid border border-black"></div>
-                        <span class="text-xs font-bold uppercase tracking-widest">Sección 01</span>
-                    </div>
-                    <h2 class="section-header">INFO<br><span class="outline-text-light">GRAFÍA</span></h2>
-                </div>
-                <div class="mt-8 md:mt-0 text-right max-w-sm">
-                    <p class="font-sans font-medium text-sm leading-6 border-l-2 border-acid pl-4 text-left md:text-right md:border-l-0 md:border-r-2 md:pl-0 md:pr-4">
-                        VISUALIZACIÓN DE DATOS <br>
-                        Sistemas de información estructurada y diagramación compleja.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Layout Principal -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Estructura Compacta (Sin Espacios) -->
+        <div class="px-6 md:px-12 relative z-10">
+            <!-- Grid Container con gap-1px para crear líneas -->
+            <div class="tech-grid-container">
                 
-                <!-- Datos Laterales -->
-                <div class="lg:col-span-3 reveal hidden lg:flex flex-col justify-between py-2 border-r border-gray-200 pr-8">
-                    <div class="space-y-8">
-                        <div>
-                            <h4 class="font-bold uppercase text-[10px] tracking-widest text-gray-400 mb-2">Cliente</h4>
-                            <p class="font-title text-lg border-b border-black pb-1 inline-block">Global Analytics</p>
-                        </div>
-                        <div>
-                            <h4 class="font-bold uppercase text-[10px] tracking-widest text-gray-400 mb-2">Software</h4>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="tech-label">Illustrator</span>
-                                <span class="tech-label">Excel</span>
+                <!-- Columna Lateral (Datos) -->
+                <div class="hidden md:flex col-span-2 tech-block p-4 flex-col justify-between">
+                    <div class="font-mono text-[10px] uppercase text-gray-500 rotate-180" style="writing-mode: vertical-rl;">
+                        System Analysis /// 2026
+                    </div>
+                    <div class="text-acid font-bold font-mono text-xl">01</div>
+                </div>
+
+                <!-- Zona Visual -->
+                <div class="col-span-12 md:col-span-10 grid grid-cols-12 gap-px bg-white/10"> <!-- Subgrid -->
+                    
+                    <!-- Imagen Principal (Ocupa todo el ancho superior) -->
+                    <div class="col-span-12 tech-block p-4 md:p-6 group">
+                        <div class="relative w-full border border-white/10 overflow-hidden">
+                            <img src="https://github.com/nixon97/portafolio/blob/main/3.png?raw=true" class="w-full h-auto object-cover opacity-90 group-hover:opacity-100 group-hover:scale-101 transition duration-700" alt="Data Main">
+                            <!-- Etiqueta técnica superpuesta -->
+                            <div class="absolute bottom-4 left-4">
+                                <span class="label-box">MARKET OVERVIEW</span>
                             </div>
                         </div>
                     </div>
-                    <div class="text-8xl font-title text-gray-100 leading-none">01</div>
-                </div>
 
-                <!-- Contenido -->
-                <div class="lg:col-span-9">
-                    <!-- Imagen Principal -->
-                    <div class="reveal tech-card mb-8">
-                        <div class="image-zoom-container aspect-video border border-gray-200">
-                            <img src="https://github.com/nixon97/portafolio/blob/main/3.png?raw=true" class="w-full h-full object-cover" alt="Infografía Main">
-                        </div>
-                        <!-- Pie de foto técnico -->
-                        <div class="mt-3 flex justify-between items-center px-1 font-mono text-[10px] text-gray-500 uppercase tracking-wider">
-                            <span>FIG 1.0 — MARKET OVERVIEW</span>
-                            <span>DATA ANALYSIS 2026</span>
-                        </div>
-                    </div>
-
-                    <!-- Grid Secundario (AHORA IGUAL AL PRINCIPAL) -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        
-                        <!-- Item 1 -->
-                        <div class="reveal tech-card">
-                            <div class="image-zoom-container aspect-square md:aspect-video border border-gray-200 mb-3">
-                                <img src="https://github.com/nixon97/portafolio/blob/main/1.png?raw=true" class="w-full h-full object-cover" alt="Info 2">
-                            </div>
-                            <div class="px-1">
-                                <h3 class="font-title text-lg">Estadística Social</h3>
-                                <div class="flex justify-between items-center mt-2 border-t border-gray-100 pt-2">
-                                    <span class="tech-label">Reporte</span>
-                                    <span class="font-mono text-[10px] text-gray-400">FIG 1.1</span>
-                                </div>
+                    <!-- Imágenes Secundarias (Pegadas abajo) -->
+                    <div class="col-span-6 tech-block p-4 md:p-6 group hover:bg-white/5 transition">
+                        <div class="relative w-full aspect-square border border-white/10 overflow-hidden">
+                            <img src="https://github.com/nixon97/portafolio/blob/main/1.png?raw=true" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500" alt="Data 2">
+                            <div class="absolute top-2 right-2">
+                                <span class="font-mono text-[10px] text-white bg-black/50 px-1">FIG 1.1</span>
                             </div>
                         </div>
-
-                        <!-- Item 2 -->
-                        <div class="reveal tech-card">
-                            <div class="image-zoom-container aspect-square md:aspect-video border border-gray-200 mb-3">
-                                <img src="https://github.com/nixon97/portafolio/blob/main/2.png?raw=true" class="w-full h-full object-cover" alt="Info 3">
-                            </div>
-                            <div class="px-1">
-                                <h3 class="font-title text-lg">Procesos Industriales</h3>
-                                <div class="flex justify-between items-center mt-2 border-t border-gray-100 pt-2">
-                                    <span class="tech-label">Isometría</span>
-                                    <span class="font-mono text-[10px] text-gray-400">FIG 1.2</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. ILUSTRACIÓN (REESTRUCTURADO - MISMO ESTILO) -->
-        <section class="px-6 md:px-12 py-24 border-b border-gray-300 bg-white">
-            
-            <!-- Header Técnico (Copiado de Infografía para consistencia) -->
-            <div class="reveal border-b border-black pb-8 mb-12 flex flex-col md:flex-row justify-between md:items-end">
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-3 h-3 bg-acid border border-black"></div>
-                        <span class="text-xs font-bold uppercase tracking-widest">Sección 02</span>
-                    </div>
-                    <h2 class="section-header">ILUS<br><span class="outline-text-light">TRACIÓN</span></h2>
-                </div>
-                <div class="mt-8 md:mt-0 text-right max-w-sm">
-                    <p class="font-sans font-medium text-sm leading-6 border-l-2 border-acid pl-4 text-left md:text-right md:border-l-0 md:border-r-2 md:pl-0 md:pr-4">
-                        SELECTED ARTWORKS <br>
-                        Exploración visual, diseño de personajes y entornos digitales.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Grid Técnico de Ilustraciones -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
-                <!-- Ilustración 1 -->
-                <div class="reveal tech-card">
-                    <div class="image-zoom-container aspect-[3/4] border border-gray-200 mb-3">
-                        <img src="https://github.com/nixon97/portafolio/blob/main/ed25b15b-9c2e-4a6a-aada-329b67d161cc.jpg?raw=true" class="w-full h-full object-cover" alt="Art 1">
-                    </div>
-                    <div class="px-1">
-                        <h3 class="font-title text-xl uppercase mb-1">Cyber Punk</h3>
-                        <div class="flex justify-between items-end border-t border-gray-100 pt-2">
-                            <span class="tech-label">Character</span>
-                            <span class="font-mono text-[10px] text-gray-400">DIGITAL / 2025</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ilustración 2 -->
-                <div class="reveal tech-card">
-                    <div class="image-zoom-container aspect-[3/4] border border-gray-200 mb-3">
-                        <img src="https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true" class="w-full h-full object-cover" alt="Art 2">
-                    </div>
-                    <div class="px-1">
-                        <h3 class="font-title text-xl uppercase mb-1">Neon City</h3>
-                        <div class="flex justify-between items-end border-t border-gray-100 pt-2">
-                            <span class="tech-label">Environment</span>
-                            <span class="font-mono text-[10px] text-gray-400">CONCEPT / 2025</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ilustración 3 -->
-                <div class="reveal tech-card">
-                    <div class="image-zoom-container aspect-[3/4] border border-gray-200 mb-3">
-                        <img src="https://github.com/nixon97/portafolio/blob/main/32d84d57-6005-4d27-82fe-dac18af42c62.jpg?raw=true" class="w-full h-full object-cover" alt="Art 3">
-                    </div>
-                    <div class="px-1">
-                        <h3 class="font-title text-xl uppercase mb-1">Surrealism</h3>
-                        <div class="flex justify-between items-end border-t border-gray-100 pt-2">
-                            <span class="tech-label">Mixed Media</span>
-                            <span class="font-mono text-[10px] text-gray-400">ART / 2024</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- 5. PRODUCTOS (ESTILO TÉCNICO REFINADO) -->
-        <section class="px-6 md:px-12 py-24">
-            
-            <div class="reveal flex items-end gap-4 mb-12 border-b border-black pb-4">
-                <div class="h-12 w-[2px] bg-acid"></div>
-                <div>
-                    <span class="text-xs font-bold uppercase tracking-widest block mb-1">Sección 03</span>
-                    <h2 class="font-title text-4xl uppercase leading-none">Productos & Editorial</h2>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 gap-8">
-                
-                <!-- Producto 1 -->
-                <div class="reveal group grid grid-cols-1 md:grid-cols-12 tech-card p-0 gap-0 overflow-hidden">
-                    <!-- Número -->
-                    <div class="md:col-span-1 bg-gray-50 flex items-center justify-center border-b md:border-b-0 md:border-r border-gray-200 py-4">
-                        <span class="font-mono text-2xl font-bold text-gray-300 group-hover:text-black transition">01</span>
+                        <h4 class="font-title text-sm uppercase mt-3 text-gray-300">Reporte Social</h4>
                     </div>
                     
-                    <!-- Info -->
-                    <div class="md:col-span-5 p-8 flex flex-col justify-center bg-white relative">
-                        <!-- Líneas decorativas de fondo -->
-                        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 20px 20px;"></div>
-                        
-                        <h3 class="font-title text-3xl uppercase mb-2 relative z-10">Libro Álbum</h3>
-                        <div class="flex gap-2 mb-6 relative z-10">
-                            <span class="tech-label bg-white">Editorial</span>
-                            <span class="tech-label bg-white">Print</span>
+                    <div class="col-span-6 tech-block p-4 md:p-6 group hover:bg-white/5 transition">
+                        <div class="relative w-full aspect-square border border-white/10 overflow-hidden">
+                            <img src="https://github.com/nixon97/portafolio/blob/main/2.png?raw=true" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500" alt="Data 3">
+                            <div class="absolute top-2 right-2">
+                                <span class="font-mono text-[10px] text-white bg-black/50 px-1">FIG 1.2</span>
+                            </div>
                         </div>
-                        <p class="text-sm text-gray-600 max-w-xs relative z-10 leading-relaxed border-l border-black pl-4">
-                            Maquetación completa y dirección de arte para edición de colección. Acabados especiales.
-                        </p>
+                        <h4 class="font-title text-sm uppercase mt-3 text-gray-300">Procesos</h4>
                     </div>
 
-                    <!-- Imagen -->
-                    <div class="md:col-span-6 relative overflow-hidden h-64 md:h-80 bg-gray-100 border-t md:border-t-0 md:border-l border-gray-200">
-                         <img src="https://github.com/nixon97/portafolio/blob/main/maqueta%20presentacion%20librox.png?raw=true" class="absolute inset-0 w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition duration-700 p-8" alt="Libro">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. ILUSTRACIÓN (GRID ASIMÉTRICO / PLANO) -->
+    <section class="relative py-20 overflow-hidden">
+         <div class="absolute inset-0 bg-dark/90 z-0"></div>
+
+        <div class="px-6 md:px-12 mb-8 relative z-10 text-center md:text-left flex flex-col md:flex-row items-end justify-between">
+            <h2 class="fat-title section-header leading-none text-white">
+                ILUS<span class="outline-text-white">TRACIÓN</span>
+            </h2>
+             <div class="hidden md:block font-mono text-[10px] text-acid uppercase tracking-widest mb-4">
+                /// Selected Artworks ///
+            </div>
+        </div>
+
+        <div class="px-6 md:px-12 relative z-10">
+            <!-- Grid Container -->
+            <div class="tech-grid-container">
+                
+                <!-- Imagen Grande (Izquierda) -->
+                <div class="col-span-12 md:col-span-6 tech-block p-0 relative group">
+                    <div class="w-full h-full relative aspect-[3/4] md:aspect-auto overflow-hidden">
+                        <img src="https://github.com/nixon97/portafolio/blob/main/ed25b15b-9c2e-4a6a-aada-329b67d161cc.jpg?raw=true" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-700" alt="Cyber Punk">
+                        
+                        <!-- Overlay Info al Hover -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <span class="label-box mb-2">CONCEPT ART</span>
+                            <h3 class="font-title text-3xl uppercase text-white">Cyber Punk</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha (Grid interno) -->
+                <div class="col-span-12 md:col-span-6 grid grid-rows-2 gap-px bg-white/10">
+                    
+                    <!-- Imagen 2 -->
+                    <div class="tech-block p-4 md:p-6 flex gap-4 items-center group relative overflow-hidden">
+                         <!-- Fondo decorativo al hover -->
+                         <div class="absolute inset-0 bg-acid/5 opacity-0 group-hover:opacity-100 transition duration-300"></div>
                          
-                         <div class="absolute bottom-0 right-0 p-4">
-                             <span class="font-mono text-[10px] uppercase bg-white border border-black px-2 py-1 shadow-[2px_2px_0_#000]">Ver Proyecto ↗</span>
+                         <div class="w-1/3 h-24 md:h-32 border border-white/10 relative overflow-hidden">
+                             <img src="https://github.com/nixon97/portafolio/blob/main/0cdacacf-8c2e-4643-bd57-f0c0d1121b48.jpg?raw=true" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Neon City">
                          </div>
+                         <div class="w-2/3 flex flex-col justify-center">
+                             <h3 class="font-title text-xl uppercase mb-1 text-white">Neon City</h3>
+                             <p class="font-sans text-[10px] text-gray-400">Exploración urbana nocturna. Paleta de color saturada.</p>
+                             <div class="w-full h-[1px] bg-white/20 mt-3"></div>
+                         </div>
+                    </div>
+
+                    <!-- Imagen 3 -->
+                    <div class="tech-block p-4 md:p-6 flex gap-4 items-center group relative overflow-hidden">
+                        <div class="absolute inset-0 bg-acid/5 opacity-0 group-hover:opacity-100 transition duration-300"></div>
+
+                        <div class="w-2/3 flex flex-col justify-center text-right">
+                            <h3 class="font-title text-xl uppercase mb-1 text-white">Surrealism</h3>
+                            <p class="font-sans text-[10px] text-gray-400">Composición mixta digital.</p>
+                            <div class="w-full h-[1px] bg-white/20 mt-3"></div>
+                        </div>
+                        <div class="w-1/3 h-24 md:h-32 border border-white/10 relative overflow-hidden">
+                            <img src="https://github.com/nixon97/portafolio/blob/main/32d84d57-6005-4d27-82fe-dac18af42c62.jpg?raw=true" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Surreal">
+                        </div>
+                   </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. PRODUCTOS (SOLIDEZ HORIZONTAL) -->
+    <section class="relative py-20 overflow-hidden">
+         <div class="absolute inset-0 bg-dark/95 z-0"></div>
+
+        <div class="px-6 md:px-12 mb-8 relative z-10 text-center md:text-left">
+             <h2 class="fat-title section-header leading-none text-white">
+                PRO<span class="outline-text-white">DUCTOS</span>
+            </h2>
+        </div>
+
+        <div class="px-6 md:px-12 relative z-10">
+            <div class="tech-grid-container">
+                <!-- Producto 1 -->
+                <div class="col-span-12 grid grid-cols-1 md:grid-cols-12 tech-block group">
+                    <div class="md:col-span-5 p-8 flex flex-col justify-center relative border-r border-white/10">
+                        <div class="absolute top-4 left-4 text-acid font-mono text-xs font-bold">01</div>
+                        <h3 class="font-title text-3xl md:text-4xl mt-4 mb-2 text-white">Libro Álbum</h3>
+                        <div class="flex gap-2 mb-4">
+                            <span class="label-box bg-transparent border-white/30 text-gray-400">Editorial</span>
+                        </div>
+                        <p class="font-sans text-xs text-gray-400 max-w-sm leading-relaxed">
+                            Diseño editorial de colección. Maquetación experimental con énfasis en la tipografía como imagen.
+                        </p>
+                    </div>
+                    <div class="md:col-span-7 h-64 md:h-80 bg-graphite relative overflow-hidden">
+                        <img src="https://github.com/nixon97/portafolio/blob/main/maqueta%20presentacion%20librox.png?raw=true" class="w-full h-full object-cover mix-blend-normal opacity-90 group-hover:scale-105 transition duration-700" alt="Libro">
                     </div>
                 </div>
 
                 <!-- Producto 2 -->
-                <div class="reveal group grid grid-cols-1 md:grid-cols-12 tech-card p-0 gap-0 overflow-hidden">
-                    <!-- Número -->
-                    <div class="md:col-span-1 bg-gray-50 flex items-center justify-center border-b md:border-b-0 md:border-r border-gray-200 py-4">
-                        <span class="font-mono text-2xl font-bold text-gray-300 group-hover:text-black transition">02</span>
+                <div class="col-span-12 grid grid-cols-1 md:grid-cols-12 tech-block group">
+                    <div class="md:col-span-7 h-64 md:h-80 bg-graphite relative overflow-hidden order-2 md:order-1 border-r border-white/10">
+                        <img src="https://github.com/nixon97/portafolio/blob/main/bed67c2e-8006-48f9-9171-7fbda5d729a9.jpg?raw=true" class="w-full h-full object-cover mix-blend-normal opacity-90 group-hover:scale-105 transition duration-700" alt="Juego">
                     </div>
-                    
-                    <!-- Info -->
-                    <div class="md:col-span-5 p-8 flex flex-col justify-center bg-white relative">
-                        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 20px 20px;"></div>
-                        
-                        <h3 class="font-title text-3xl uppercase mb-2 relative z-10">Juego de Mesa</h3>
-                        <div class="flex gap-2 mb-6 relative z-10">
-                            <span class="tech-label bg-white">Packaging</span>
-                            <span class="tech-label bg-white">UX</span>
+                    <div class="md:col-span-5 p-8 flex flex-col justify-center relative order-1 md:order-2">
+                         <div class="absolute top-4 right-4 text-acid font-mono text-xs font-bold">02</div>
+                        <h3 class="font-title text-3xl md:text-4xl mt-4 mb-2 text-white">Board Game</h3>
+                        <div class="flex gap-2 mb-4">
+                            <span class="label-box bg-transparent border-white/30 text-gray-400">Packaging</span>
                         </div>
-                        <p class="text-sm text-gray-600 max-w-xs relative z-10 leading-relaxed border-l border-black pl-4">
-                            Sistema de empaque ecológico y diseño de experiencia de juego física (Physical UX).
+                        <p class="font-sans text-xs text-gray-400 max-w-sm leading-relaxed">
+                            Sistema de empaque y tablero. Experiencia de usuario física.
                         </p>
                     </div>
-
-                    <!-- Imagen -->
-                    <div class="md:col-span-6 relative overflow-hidden h-64 md:h-80 bg-gray-100 border-t md:border-t-0 md:border-l border-gray-200">
-                         <img src="https://github.com/nixon97/portafolio/blob/main/bed67c2e-8006-48f9-9171-7fbda5d729a9.jpg?raw=true" class="absolute inset-0 w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition duration-700 p-4" alt="Juego">
-                         
-                         <div class="absolute bottom-0 right-0 p-4">
-                             <span class="font-mono text-[10px] uppercase bg-white border border-black px-2 py-1 shadow-[2px_2px_0_#000]">Ver Proyecto ↗</span>
-                         </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- FOOTER -->
-        <footer class="px-6 md:px-12 py-16 bg-black text-white border-t-4 border-acid">
-            <div class="reveal grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div>
-                    <p class="text-[10px] uppercase tracking-widest font-bold text-acid mb-6">¿Listo para crear?</p>
-                    <a href="mailto:nixonvaldo.valero@gmail.com" class="block group w-fit">
-                        <h2 class="fat-title text-white group-hover:text-acid transition-colors duration-300 text-6xl md:text-8xl leading-none">
-                            HOLA!
-                        </h2>
-                    </a>
-                </div>
-                <div class="flex flex-col justify-between items-end text-right">
-                    <div class="flex gap-6 font-mono text-sm">
-                        <a href="#" class="hover:text-acid hover:underline decoration-acid underline-offset-4 transition">Behance</a>
-                        <a href="#" class="hover:text-acid hover:underline decoration-acid underline-offset-4 transition">Instagram</a>
-                        <a href="#" class="hover:text-acid hover:underline decoration-acid underline-offset-4 transition">LinkedIn</a>
-                    </div>
-                    <div class="mt-8 text-[10px] font-mono text-gray-500 uppercase tracking-widest">
-                        © 2026 Nixon Valero — Cúcuta, Colombia.<br>
-                        All rights reserved.
-                    </div>
                 </div>
             </div>
-        </footer>
+        </div>
+    </section>
 
-    </main>
+    <!-- FOOTER -->
+    <footer class="bg-black text-white py-24 border-t-4 border-acid relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full py-4 border-b border-white/10 overflow-hidden bg-acid text-black">
+            <div class="animate-marquee whitespace-nowrap font-mono text-sm font-bold uppercase tracking-widest">
+                Open for work /// Available for freelance /// Let's create something iconic /// Open for work /// Available for freelance ///
+            </div>
+        </div>
 
-    <!-- SCRIPT (INTACTO) -->
+        <div class="px-6 md:px-12 mt-12 grid grid-cols-2 gap-12">
+            <div>
+                <p class="font-mono text-xs text-gray-500 mb-4">CONTACTO</p>
+                <a href="mailto:nixonvaldo.valero@gmail.com" class="font-title text-4xl md:text-6xl hover:text-acid transition duration-300">
+                    HABLEMOS
+                </a>
+            </div>
+            <div class="flex flex-col justify-end items-end">
+                <div class="flex gap-6 mb-8 font-mono text-xs md:text-sm">
+                    <a href="#" class="hover:text-acid hover:underline">BEHANCE</a>
+                    <a href="#" class="hover:text-acid hover:underline">INSTAGRAM</a>
+                </div>
+                <div class="text-[10px] uppercase tracking-widest text-gray-600 text-right">
+                    © 2026 Nixon Valero <br> Cúcuta, Colombia
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT ORIGINAL (V12 Logic) -->
     <script>
         const canvas = document.getElementById('constellationCanvas');
         const ctx = canvas.getContext('2d');
@@ -499,7 +436,6 @@
         let allPoints = []; 
         let neonStars = [];
         let connections = []; 
-        
         class DistantStar {
             constructor() {
                 this.x = Math.random() * width;
